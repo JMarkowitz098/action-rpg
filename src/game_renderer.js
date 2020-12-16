@@ -7,11 +7,11 @@ class GameRenderer {
         this.gameCanvas = gameCanvas
 
         this.step = this.step.bind(this)
-        // this.onKeyDown = this.onKeyDown.bind(this)
+        this.onKeyDown = this.onKeyDown.bind(this)
     }
 
     start() {
-        // this.bindKeyHandlers()
+        this.bindKeyHandlers()
         requestAnimationFrame(this.step)
     }
 
@@ -24,19 +24,17 @@ class GameRenderer {
         requestAnimationFrame(this.step)
     }
 
-    // onKeyDown(e) {
-    //     const { gameCanvas, dirOptions } = this
-    //     const newDir = dirOptions[e.key];
+    onKeyDown(e) {
+        const { gameCanvas, dirOptions } = this
+        console.log(e.key)
 
-    //     if (Object.keys(dirOptions).includes(e.key))
-    //         gameCanvas.snake.changeDir(newDir)
+        if (Object.keys(dirOptions).includes(e.key))
+            gameCanvas.hero.move(dirOptions[e.key])
+    }
 
-    //     // if (e.key === 'q') gameCanvas.snake.increaseLength(); //Cheat
-    // }
-
-    // bindKeyHandlers() {
-    //     document.addEventListener("keydown", this.onKeyDown)
-    // };
+    bindKeyHandlers() {
+        document.addEventListener("keydown", this.onKeyDown)
+    };
 }
 
 export default GameRenderer

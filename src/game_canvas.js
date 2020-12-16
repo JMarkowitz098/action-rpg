@@ -16,7 +16,7 @@ class GameCanvas {
     }
 
     placeHero(){
-        const hero = new Hero({pos: {x: 100, y: 100}})
+        const hero = new Hero({pos: CONSTANTS.HERO_START_POS})
         return hero;
     }
 
