@@ -5,8 +5,10 @@ class GameRenderer {
         this.dirOptions = CONSTANTS.DIR_OPTIONS
         this.ctx = ctx
         this.gameCanvas = gameCanvas
+        this.keysDown = {}
 
         this.step = this.step.bind(this)
+        this.onKeyUp = this.onKeyUp.bind(this)
         this.onKeyDown = this.onKeyDown.bind(this)
     }
 
@@ -24,15 +26,25 @@ class GameRenderer {
         requestAnimationFrame(this.step)
     }
 
-    onKeyDown(e) {
+    onKeyUp(e){
         const { gameCanvas, dirOptions } = this
-        console.log(e.key)
+        if (Object.keys(dirOptions).includes(e.key)) {
+            // const moveDir = dirOptions[e.key]
+            // gameCanvas.hero.move(this.keysDown)
+            this.keysDown = {}
+        }
+    }
 
-        if (Object.keys(dirOptions).includes(e.key))
-            gameCanvas.hero.move(dirOptions[e.key])
+    onKeyDown(e) {
+        const { gameCanvas, dirOptions, keysDown } = this;
+        if (Object.keys(dirOptions).includes(e.key)){
+            keysDown[dirOptions[e.key]] = true;
+            gameCanvas.hero.move(keysDown)
+        }
     }
 
     bindKeyHandlers() {
+        document.addEventListener("keyup", this.onKeyUp)
         document.addEventListener("keydown", this.onKeyDown)
     };
 }
