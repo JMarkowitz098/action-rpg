@@ -1,7 +1,7 @@
 export const UNIT = 5;
 
-export const CANVAS_SIDE_LENGTH = 300;
-export const CANVAS_START_POS = 100;
+export const CANVAS_SIDE_LENGTH = 500;
+export const CANVAS_START_POS = 50;
 export const CANVAS_UP_BOUNDARY = 0 + CANVAS_START_POS;
 export const CANVAS_DOWN_BOUNDARY = 0 + CANVAS_START_POS + CANVAS_SIDE_LENGTH;
 export const CANVAS_LEFT_BOUNDARY = 0 + CANVAS_START_POS;
@@ -41,6 +41,6 @@ export const HERO_COLOR = 'blue';
 export const HERO_DASH_KEY = 'z';
 export const HERO_DASH_VEL = 3;
 export const HERO_SIZE = UNIT * 5;
-export const HERO_MOVE_LENGTH = 2;
+export const HERO_MOVE_LENGTH = 4;
 export const HERO_START_POS = { x: CANVAS_START_POS, y: CANVAS_START_POS}
 
