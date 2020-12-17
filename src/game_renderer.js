@@ -22,24 +22,40 @@ class GameRenderer {
         gameCanvas.clearCanvas(ctx)
 
         gameCanvas.hero.draw(ctx);
+        gameCanvas.hero.move();
 
         requestAnimationFrame(this.step)
     }
 
     onKeyUp(e){
         const { gameCanvas, dirOptions } = this
-        if (Object.keys(dirOptions).includes(e.key)) {
-            // const moveDir = dirOptions[e.key]
-            // gameCanvas.hero.move(this.keysDown)
-            this.keysDown = {}
+
+        if (dirOptions.hasOwnProperty(e.key)) {
+            let dir = dirOptions[e.key]
+            this.keysDown[dir] = false
         }
+
+        if (Object.values(this.keysDown).every(val => val === false))
+            gameCanvas.hero.changeVel(0)
+
+        if(e.key === CONSTANTS.HERO_DASH_KEY)
+            gameCanvas.hero.changeVel(1)
+        
     }
 
     onKeyDown(e) {
         const { gameCanvas, dirOptions, keysDown } = this;
-        if (Object.keys(dirOptions).includes(e.key)){
+
+        if (dirOptions.hasOwnProperty(e.key)){
             keysDown[dirOptions[e.key]] = true;
-            gameCanvas.hero.move(keysDown)
+            gameCanvas.hero.changeVel(1)
+            gameCanvas.hero.changeDir(keysDown)
+
+        }
+
+        if (e.key === CONSTANTS.HERO_DASH_KEY) {
+            gameCanvas.hero.changeVel(3)
+            gameCanvas.hero.changeDir(keysDown)
         }
     }
 

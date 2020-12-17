@@ -6,6 +6,8 @@ class Hero {
         this.color = CONSTANTS.HERO_COLOR
         this.x = pos.x,
         this.y = pos.y
+        this.vel = 0
+        this.dir = 'down'
     }
 
     draw(ctx) {
@@ -15,43 +17,60 @@ class Hero {
         ctx.fillRect(x, y, length, length);
     }
 
-    move(keysDown){
-        let dir = Object.keys(keysDown).sort().join(' ')
-        const {x, y} = this
-        let newX = x;
+    dash(keysDown){
+        this.changeDir(keysDown, CONSTANTS.HERO_DASH_VEL)
+    }
+
+    changeDir(keysDown){
+        let newDir = Object.entries(keysDown)
+        .filter(([key, val]) => val)
+        .map(([key, val]) => key)
+        .sort()
+        .join(' ');
+        if (CONSTANTS.DIR_POSSIBLE_MOVES.includes(newDir))
+            this.dir = newDir;
+    }
+
+    changeVel(vel){
+        this.vel = vel
+    }
+
+    move(){
+        const { x, y, dir, vel } = this;
+        let newX = x
         let newY = y;
         switch (dir) {
             case CONSTANTS.DIR_UP:
-                newY = y - CONSTANTS.HERO_MOVE_LENGTH
+                newY = y - CONSTANTS.HERO_MOVE_LENGTH * vel
                 break;
             case CONSTANTS.DIR_DOWN:
-                newY = y + CONSTANTS.HERO_MOVE_LENGTH
+                newY = y + CONSTANTS.HERO_MOVE_LENGTH * vel
                 break;
             case CONSTANTS.DIR_LEFT:
-                newX = x - CONSTANTS.HERO_MOVE_LENGTH
+                newX = x - CONSTANTS.HERO_MOVE_LENGTH * vel
                 break;
             case CONSTANTS.DIR_RIGHT:
-                newX = x + CONSTANTS.HERO_MOVE_LENGTH
+                newX = x + CONSTANTS.HERO_MOVE_LENGTH * vel
                 break;
             case CONSTANTS.DIR_LEFT_UP:
-                newX = x - CONSTANTS.HERO_MOVE_LENGTH
-                newY = y - CONSTANTS.HERO_MOVE_LENGTH
+                newX = x - CONSTANTS.HERO_MOVE_LENGTH * vel
+                newY = y - CONSTANTS.HERO_MOVE_LENGTH * vel
                 break;
             case CONSTANTS.DIR_RIGHT_UP:
-                newX = x + CONSTANTS.HERO_MOVE_LENGTH
-                newY = y - CONSTANTS.HERO_MOVE_LENGTH
+                newX = x + CONSTANTS.HERO_MOVE_LENGTH * vel
+                newY = y - CONSTANTS.HERO_MOVE_LENGTH * vel
                 break;
             case CONSTANTS.DIR_DOWN_LEFT:
-                newX = x - CONSTANTS.HERO_MOVE_LENGTH
-                newY = y + CONSTANTS.HERO_MOVE_LENGTH
+                newX = x - CONSTANTS.HERO_MOVE_LENGTH * vel
+                newY = y + CONSTANTS.HERO_MOVE_LENGTH * vel
                 break;
             case CONSTANTS.DIR_DOWN_RIGHT:
-                newX = x + CONSTANTS.HERO_MOVE_LENGTH
-                newY = y + CONSTANTS.HERO_MOVE_LENGTH
+                newX = x + CONSTANTS.HERO_MOVE_LENGTH * vel
+                newY = y + CONSTANTS.HERO_MOVE_LENGTH * vel
                 break;
         }
 
-        if (this.validMove(dir, newX, newY)){
+        if (this.validMove(dir, newX, newY)) {
             this.x = newX
             this.y = newY
         }

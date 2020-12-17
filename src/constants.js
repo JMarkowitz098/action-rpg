@@ -15,6 +15,16 @@ export const DIR_LEFT_UP = DIR_LEFT + ' ' + DIR_UP
 export const DIR_RIGHT_UP = DIR_RIGHT + ' ' + DIR_UP
 export const DIR_DOWN_RIGHT = DIR_DOWN + ' ' + DIR_RIGHT
 export const DIR_DOWN_LEFT = DIR_DOWN + ' ' + DIR_LEFT
+export const DIR_POSSIBLE_MOVES = [
+    DIR_DOWN,
+    DIR_LEFT,
+    DIR_UP,
+    DIR_RIGHT,
+    DIR_LEFT_UP,
+    DIR_RIGHT_UP,
+    DIR_DOWN_RIGHT,
+    DIR_DOWN_LEFT
+]
 
 export const DIR_OPTIONS = {
     w: DIR_UP,
@@ -28,7 +38,9 @@ export const DIR_OPTIONS = {
 }
 
 export const HERO_COLOR = 'blue';
+export const HERO_DASH_KEY = 'z';
+export const HERO_DASH_VEL = 3;
 export const HERO_SIZE = UNIT * 5;
-export const HERO_MOVE_LENGTH = UNIT * 4;
+export const HERO_MOVE_LENGTH = 2;
 export const HERO_START_POS = { x: CANVAS_START_POS, y: CANVAS_START_POS}
 

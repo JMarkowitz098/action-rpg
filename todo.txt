@@ -1,0 +1,2 @@
+-Make it so when you dash you hit wall instead of stopping early
+-
