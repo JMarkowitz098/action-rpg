@@ -4,8 +4,16 @@ import Enemy from './enemy'
 
 const getRandPos = () => {
     const factor = CONSTANTS.CANVAS_SIDE_LENGTH / CONSTANTS.UNIT
-    let x = Math.floor(Math.random() * factor) * CONSTANTS.UNIT + 100
-    let y = Math.floor(Math.random() * factor) * CONSTANTS.UNIT + 100
+    let x = Math.floor(Math.random() * factor) * CONSTANTS.UNIT
+    let y = Math.floor(Math.random() * factor) * CONSTANTS.UNIT
+    while (x > CONSTANTS.CANVAS_SIDE_LENGTH 
+        || y > CONSTANTS.CANVAS_SIDE_LENGTH
+        || x < CONSTANTS.CANVAS_START_POS + CONSTANTS.ENEMY_SIZE
+        || y < CONSTANTS.CANVAS_START_POS + CONSTANTS.ENEMY_SIZE
+    ){
+        x = Math.floor(Math.random() * factor) * CONSTANTS.UNIT
+        y = Math.floor(Math.random() * factor) * CONSTANTS.UNIT
+    }
     return { x, y }
 }
 
@@ -39,6 +47,10 @@ class GameCanvas {
         this.enemies.forEach(enemy => enemy.move())
     }
 
+    checkForCollisions(){
+        return this.enemies.some(enemy => this.hero.collidedWith(enemy) === true)
+    }
+
     changeEnemyDirections(){
         this.enemies.forEach(enemy => {
             const randSecond = Math.floor(Math.random() * 3000)
@@ -54,7 +66,7 @@ class GameCanvas {
             CONSTANTS.CANVAS_SIDE_LENGTH,
             CONSTANTS.CANVAS_SIDE_LENGTH
         );
-        ctx.fillStyle = "black";
+        ctx.fillStyle = CONSTANTS.CANVAS_COLOR;
         ctx.fillRect(
             CONSTANTS.CANVAS_START_POS,
             CONSTANTS.CANVAS_START_POS,

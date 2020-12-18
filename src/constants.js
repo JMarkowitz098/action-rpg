@@ -2,6 +2,7 @@ export const UNIT = 5;
 
 export const CANVAS_SIDE_LENGTH = 500;
 export const CANVAS_START_POS = 50;
+export const CANVAS_COLOR = 'black';
 export const CANVAS_UP_BOUNDARY = 0 + CANVAS_START_POS;
 export const CANVAS_DOWN_BOUNDARY = 0 + CANVAS_START_POS + CANVAS_SIDE_LENGTH;
 export const CANVAS_LEFT_BOUNDARY = 0 + CANVAS_START_POS;

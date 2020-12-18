@@ -35,6 +35,26 @@ class Hero {
         this.vel = vel
     }
 
+    collidedWith(enemyPos){
+        let enemyX = enemyPos.x
+        let enemyY = enemyPos.y
+        let enemyLeft = enemyX - CONSTANTS.ENEMY_SIZE
+        let enemyRight = enemyX + CONSTANTS.ENEMY_SIZE
+        let enemyUp = enemyY - CONSTANTS.ENEMY_SIZE
+        let enemyDown = enemyY + CONSTANTS.ENEMY_SIZE
+
+        // debugger
+
+        // console.log({x: this.x, y: this.y})
+        // console.log({enemyLeft, enemyDown, enemyRight, enemyUp})
+
+        return (this.x > enemyLeft 
+            && this.x < enemyRight
+            && this.y < enemyUp
+            && this.y < enemyDown
+        )
+    }
+
     move(){
         const { x, y, dir, vel } = this;
         let newX = x
