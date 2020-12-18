@@ -23,6 +23,8 @@ class GameRenderer {
 
         gameCanvas.hero.draw(ctx);
         gameCanvas.hero.move();
+        gameCanvas.drawEnemies(ctx);
+        gameCanvas.moveEnemies(ctx);
 
         requestAnimationFrame(this.step)
     }
@@ -50,13 +52,16 @@ class GameRenderer {
             keysDown[dirOptions[e.key]] = true;
             gameCanvas.hero.changeVel(1)
             gameCanvas.hero.changeDir(keysDown)
-
         }
 
         if (e.key === CONSTANTS.HERO_DASH_KEY) {
             gameCanvas.hero.changeVel(3)
             gameCanvas.hero.changeDir(keysDown)
         }
+
+        if (e.key === 'q')
+            gameCanvas.placeNewEnemy()
+        
     }
 
     bindKeyHandlers() {

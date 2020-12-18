@@ -9,5 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const gameRenderer = new GameRenderer({gameCanvas, ctx})
 
     gameRenderer.start()
+    setInterval(gameCanvas.changeEnemyDirections, 1000);
 
 });
