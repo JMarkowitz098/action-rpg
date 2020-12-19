@@ -26,6 +26,7 @@ class GameRenderer {
         gameCanvas.drawEnemies(ctx);
         gameCanvas.moveEnemies(ctx);
         gameCanvas.checkForCollisions()
+        gameCanvas.hero.weapon.draw(ctx)
 
         requestAnimationFrame(this.step)
     }
@@ -62,6 +63,9 @@ class GameRenderer {
 
         if (e.key === 'q')
             gameCanvas.placeNewEnemy()
+
+        if (e.key === 'x')
+            gameCanvas.hero.useWeapon()
         
     }
 

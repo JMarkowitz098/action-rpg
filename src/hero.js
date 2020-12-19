@@ -1,4 +1,5 @@
 import * as CONSTANTS from './constants'
+import Weapon from './weapon'
 
 class Hero {
     constructor({pos}){
@@ -8,6 +9,9 @@ class Hero {
         this.y = pos.y
         this.vel = 0
         this.dir = 'down'
+        this.weapon = new Weapon()
+
+        this.putAwayWeapon = this.putAwayWeapon.bind(this)
     }
 
     draw(ctx) {
@@ -46,6 +50,60 @@ class Hero {
             this.x + heroWidth > enemyX &&
             this.y < enemyY + enemyWidth &&
             this.y + heroWidth > enemyY) 
+    }
+
+    useWeapon(){
+        this.weapon.color = CONSTANTS.WEAPON_COLOR
+        this.weapon.x = this.getWeaponPos().x
+        this.weapon.y = this.getWeaponPos().y
+        setTimeout(this.putAwayWeapon, 50)
+    }
+
+    getWeaponPos(){
+        const { x, y, dir } = this
+        let dist = (CONSTANTS.HERO_SIZE - CONSTANTS.WEAPON_SIZE) / 2
+        let diagDist = (CONSTANTS.WEAPON_DIST / 2) * Math.sqrt(2)
+        let newX = x + dist
+        let newY = y + dist
+
+        switch (dir) {
+            case CONSTANTS.DIR_UP:
+                newY = newY - CONSTANTS.WEAPON_DIST
+                break;
+            case CONSTANTS.DIR_DOWN:
+                newY = newY + CONSTANTS.WEAPON_DIST
+                break;
+            case CONSTANTS.DIR_LEFT:
+                newX = newX - CONSTANTS.WEAPON_DIST
+                break;
+            case CONSTANTS.DIR_RIGHT:
+                newX = newX + CONSTANTS.WEAPON_DIST
+                break;
+            case CONSTANTS.DIR_LEFT_UP:
+                newX = newX - diagDist
+                newY = newY - diagDist
+                break;
+            case CONSTANTS.DIR_RIGHT_UP:
+                newX = newX + diagDist
+                newY = newY - diagDist
+                break;
+            case CONSTANTS.DIR_DOWN_LEFT:
+                newX = newX - diagDist
+                newY = newY + diagDist
+                break;
+            case CONSTANTS.DIR_DOWN_RIGHT:
+                newX = newX + diagDist
+                newY = newY + diagDist
+                break;
+        }
+
+        return ({x: newX, y: newY})
+    }
+
+    putAwayWeapon(){
+        this.weapon.color = 'white' // Outside of canvas color
+        this.weapon.x = null
+        this.weapon.y = null
     }
 
     move(){

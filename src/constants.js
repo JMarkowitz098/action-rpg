@@ -49,3 +49,8 @@ export const HERO_SIZE = UNIT * 5;
 export const HERO_MOVE_LENGTH = 4;
 export const HERO_START_POS = { x: CANVAS_START_POS, y: CANVAS_START_POS}
 
+export const WEAPON_COLOR = 'green'
+export const WEAPON_SIZE = UNIT * 2
+export const WEAPON_DIST = 60
+
+
