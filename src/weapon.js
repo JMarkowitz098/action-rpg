@@ -21,7 +21,9 @@ class Weapon {
                 break;
             case CONSTANTS.WEAPON_DIR_HORIZONTAL:
                 this.drawHorizontally(ctx)
-            default:
+                break;
+            case CONSTANTS.WEAPON_DIR_DIAG_RIGHT:
+                this.drawDiagonallyRight(ctx)
                 break;
         }
     }
@@ -44,22 +46,37 @@ class Weapon {
         const { length, width, color, x, y } = this
         ctx.fillStyle = color;
 
+        // ctx.fillRect(x, y, width, length);
+
+
+
+
+        // Point of transform origin
+        ctx.translate(x + 30, y + 30);
         ctx.rotate(45 * Math.PI / 180);
-        ctx.fillRect(x, y, width, length);
+        ctx.fillRect(0, 0, width, length);
+
+        // Reset transformation matrix to the identity matrix
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
     }
 
     collidedWith(enemyPos) {
         const enemyX = enemyPos.x - CONSTANTS.ENEMY_SIZE
         const enemyY = enemyPos.y - CONSTANTS.ENEMY_SIZE
         const enemyWidth = CONSTANTS.ENEMY_SIZE * 2
-        const weaponWidth = CONSTANTS.WEAPON_WIDTH
-        const weaponLength = CONSTANTS.WEAPON_LENGTH
+        const weaponWidth = this.dir === CONSTANTS.WEAPON_DIR_VERTICAL 
+            ? CONSTANTS.WEAPON_WIDTH 
+            : CONSTANTS.WEAPON_LENGTH
+        const weaponLength = this.dir === CONSTANTS.WEAPON_DIR_VERTICAL
+            ? CONSTANTS.WEAPON_LENGTH
+            : CONSTANTS.WEAPON_WIDTH
 
-        // Detect if 2 rectngles have collided
+        // Detect if 2 rectangles have collided
         return (this.x < enemyX + enemyWidth &&
             this.x + weaponWidth > enemyX &&
             this.y < enemyY + enemyWidth &&
             this.y + weaponLength > enemyY)
+     
     }
 }
 

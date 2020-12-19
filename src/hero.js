@@ -77,9 +77,6 @@ class Hero {
             case CONSTANTS.DIR_RIGHT_UP:
             case CONSTANTS.DIR_DOWN_LEFT:
                 return CONSTANTS.WEAPON_DIR_DIAG_LEFT
-                
-                
-                
         }
     }
 
@@ -106,6 +103,11 @@ class Hero {
             newY = y
             delta = CONSTANTS.WEAPON_DIST
             diagDelta = (CONSTANTS.WEAPON_DIST / 2) * Math.sqrt(2)
+        } else if(type === CONSTANTS.WEAPON_DIR_DIAG_RIGHT){
+            newX = x
+            newY = y
+            delta = 0
+            diagDelta = 0
         }
 
         switch (dir) {
