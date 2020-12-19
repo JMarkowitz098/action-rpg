@@ -81,36 +81,11 @@ class Hero {
     }
 
     getNewPosUsingDir(type){
-        const { x, y, dir, vel } = this;
-        let newX, newY, delta, diagDelta
+        const { oldX, oldY, delta, diagDelta } = this.getCoordInfo(type)
+        let newX = oldX
+        let newY = oldY
 
-        if (type === 'heroMovement'){
-            newX = x;
-            newY = y;
-            delta = CONSTANTS.HERO_MOVE_LENGTH * vel
-            diagDelta = delta
-        } else if(type === CONSTANTS.WEAPON_DIR_VERTICAL) {
-            let distX = (CONSTANTS.HERO_SIZE - CONSTANTS.WEAPON_WIDTH) / 2
-            let distY = (CONSTANTS.HERO_SIZE - CONSTANTS.WEAPON_LENGTH) / 2
-            newX = x + distX
-            newY = y + distY
-            delta = CONSTANTS.WEAPON_DIST
-            diagDelta = (CONSTANTS.WEAPON_DIST / 2) * Math.sqrt(2)
-        } else if(type === CONSTANTS.WEAPON_DIR_HORIZONTAL){
-            let distX = (CONSTANTS.WEAPON_LENGTH - CONSTANTS.HERO_SIZE) / 2
-            let distY = y
-            newX = x - distX
-            newY = y
-            delta = CONSTANTS.WEAPON_DIST
-            diagDelta = (CONSTANTS.WEAPON_DIST / 2) * Math.sqrt(2)
-        } else if(type === CONSTANTS.WEAPON_DIR_DIAG_RIGHT){
-            newX = x
-            newY = y
-            delta = 0
-            diagDelta = 0
-        }
-
-        switch (dir) {
+        switch (this.dir) {
             case CONSTANTS.DIR_UP:
                 newY = newY - delta
                 break;
@@ -144,6 +119,37 @@ class Hero {
         return ({newX, newY})
     }
 
+    getCoordInfo(type){
+        const { x, y, vel } = this;
+        let oldX, oldY, delta, diagDelta;
+        switch (type) {
+            case CONSTANTS.HERO_MOVEMENT:
+                oldX = x;
+                oldY = y;
+                delta = CONSTANTS.HERO_MOVE_LENGTH * vel
+                diagDelta = delta
+                break;
+            case CONSTANTS.WEAPON_DIR_VERTICAL:
+                oldX = x + (CONSTANTS.HERO_SIZE - CONSTANTS.WEAPON_WIDTH) / 2
+                oldY = y + (CONSTANTS.HERO_SIZE - CONSTANTS.WEAPON_LENGTH) / 2
+                delta = CONSTANTS.WEAPON_DIST
+                diagDelta = (CONSTANTS.WEAPON_DIST / 2) * Math.sqrt(2)
+                break;
+            case CONSTANTS.WEAPON_DIR_HORIZONTAL:
+                oldX = x - (CONSTANTS.WEAPON_LENGTH - CONSTANTS.HERO_SIZE) / 2
+                oldY = y
+                delta = CONSTANTS.WEAPON_DIST
+                diagDelta = (CONSTANTS.WEAPON_DIST / 2) * Math.sqrt(2)
+            case CONSTANTS.WEAPON_DIR_DIAG_RIGHT:
+                oldX = x - (CONSTANTS.WEAPON_LENGTH - CONSTANTS.HERO_SIZE) / 2
+                oldY = y
+                delta = CONSTANTS.WEAPON_DIST
+                diagDelta = (CONSTANTS.WEAPON_DIST / 2) * Math.sqrt(2)
+        }
+        
+        return { oldX, oldY, delta, diagDelta }
+    }
+
     putAwayWeapon(){
         this.weapon.color = 'white' // Outside of canvas color
         this.weapon.x = null
@@ -151,7 +157,7 @@ class Hero {
     }
 
     move(){
-        const { newX, newY } = this.getNewPosUsingDir('heroMovement')
+        const { newX, newY } = this.getNewPosUsingDir(CONSTANTS.HERO_MOVEMENT)
 
         if (this.isInCanvas(this.dir, newX, newY)) {
             this.x = newX

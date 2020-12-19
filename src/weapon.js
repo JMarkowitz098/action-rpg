@@ -11,10 +11,6 @@ class Weapon {
     }
 
     draw(ctx){
-        // this.dir === CONSTANTS.WEAPON_DIR_VERTICAL 
-        //     ? this.drawVertically(ctx)
-        //     : this.drawHorizontally(ctx)
-        
         switch (this.dir) {
             case CONSTANTS.WEAPON_DIR_VERTICAL:
                 this.drawVertically(ctx)
@@ -23,7 +19,8 @@ class Weapon {
                 this.drawHorizontally(ctx)
                 break;
             case CONSTANTS.WEAPON_DIR_DIAG_RIGHT:
-                this.drawDiagonallyRight(ctx)
+                this.drawHorizontally(ctx)
+                // this.drawDiagonallyRight(ctx)
                 break;
         }
     }
@@ -65,11 +62,9 @@ class Weapon {
         const enemyY = enemyPos.y - CONSTANTS.ENEMY_SIZE
         const enemyWidth = CONSTANTS.ENEMY_SIZE * 2
         const weaponWidth = this.dir === CONSTANTS.WEAPON_DIR_VERTICAL 
-            ? CONSTANTS.WEAPON_WIDTH 
-            : CONSTANTS.WEAPON_LENGTH
+            ? CONSTANTS.WEAPON_WIDTH : CONSTANTS.WEAPON_LENGTH
         const weaponLength = this.dir === CONSTANTS.WEAPON_DIR_VERTICAL
-            ? CONSTANTS.WEAPON_LENGTH
-            : CONSTANTS.WEAPON_WIDTH
+            ? CONSTANTS.WEAPON_LENGTH : CONSTANTS.WEAPON_WIDTH
 
         // Detect if 2 rectangles have collided
         return (this.x < enemyX + enemyWidth &&
