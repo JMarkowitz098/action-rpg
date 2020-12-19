@@ -25,6 +25,7 @@ class GameCanvas {
 
         this.clearCanvas = this.clearCanvas.bind(this)
         this.changeEnemyDirections = this.changeEnemyDirections.bind(this)
+        this.placeNewEnemy = this.placeNewEnemy.bind(this)
     }
 
     placeNewEnemy() {
@@ -43,17 +44,27 @@ class GameCanvas {
         this.enemies.forEach(enemy => enemy.draw(ctx))
     }
 
+    drawWeapon(ctx){
+        this.hero.weapon.draw(ctx)
+    }
+
     moveEnemies(){
         this.enemies.forEach(enemy => enemy.move())
     }
 
     checkForCollisions(){
-        let collided = this.enemies.some(enemy => this.hero.collidedWith(enemy))
-        if (collided) {
+        let heroColidedWithEnemy = 
+            this.enemies.some(enemy => this.hero.collidedWith(enemy))
+        if (heroColidedWithEnemy) {
             this.hero.color = 'purple'
             setTimeout(() => this.hero.color = 'blue', 3000)
         }
-        return collided
+        
+        let enemyIdxs = []
+        this.enemies.forEach((enemy, idx) => {
+            if (this.hero.weapon.collidedWith(enemy)) enemyIdxs.push(idx)
+        })
+        enemyIdxs.forEach(idx => this.enemies.splice(idx, 1))
     }
 
     changeEnemyDirections(){

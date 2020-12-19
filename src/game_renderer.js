@@ -24,9 +24,10 @@ class GameRenderer {
         gameCanvas.hero.draw(ctx);
         gameCanvas.hero.move();
         gameCanvas.drawEnemies(ctx);
-        gameCanvas.moveEnemies(ctx);
+        // gameCanvas.moveEnemies(ctx);
         gameCanvas.checkForCollisions()
-        gameCanvas.hero.weapon.draw(ctx)
+        // gameCanvas.hero.weapon.draw(ctx)
+        gameCanvas.drawWeapon(ctx)
 
         requestAnimationFrame(this.step)
     }

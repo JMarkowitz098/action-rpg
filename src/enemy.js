@@ -39,6 +39,12 @@ class Enemy {
         this.vel = vel
     }
 
+    die() {
+        this.color = CONSTANTS.CANVAS_OUTSIDE_COLOR
+        this.x = null;
+        this.y = null;
+    }
+
     move() {
         const { x, y, dir, vel } = this;
         let newX = x

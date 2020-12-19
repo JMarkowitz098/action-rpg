@@ -6,7 +6,8 @@ export const CANVAS_COLOR = 'black';
 export const CANVAS_UP_BOUNDARY = 0 + CANVAS_START_POS;
 export const CANVAS_DOWN_BOUNDARY = 0 + CANVAS_START_POS + CANVAS_SIDE_LENGTH;
 export const CANVAS_LEFT_BOUNDARY = 0 + CANVAS_START_POS;
-export const CANVAS_RIGHT_BOUNDARY = 0 + CANVAS_START_POS + CANVAS_SIDE_LENGTH;;
+export const CANVAS_RIGHT_BOUNDARY = 0 + CANVAS_START_POS + CANVAS_SIDE_LENGTH;
+export const CANVAS_OUTSIDE_COLOR = 'white'
 
 export const DIR_DOWN = 'down'
 export const DIR_LEFT = 'left'
@@ -41,6 +42,7 @@ export const DIR_OPTIONS = {
 export const ENEMY_SIZE = UNIT * 3
 export const ENEMY_COLOR = 'red'
 export const ENEMY_MOVE_LENGTH = 2
+export const ENEMY_SPAWN_RATE = 2000
 
 export const HERO_COLOR = 'blue';
 export const HERO_DASH_KEY = 'z';
@@ -50,7 +52,12 @@ export const HERO_MOVE_LENGTH = 4;
 export const HERO_START_POS = { x: CANVAS_START_POS, y: CANVAS_START_POS}
 
 export const WEAPON_COLOR = 'green'
-export const WEAPON_SIZE = UNIT * 2
-export const WEAPON_DIST = 60
+export const WEAPON_LENGTH = UNIT * 12
+export const WEAPON_WIDTH = UNIT * 6
+export const WEAPON_DIST = 40
+export const WEAPON_DIR_HORIZONTAL = 'horizontal'
+export const WEAPON_DIR_VERTICAL = 'vertical'
+export const WEAPON_DIR_DIAG_LEFT = 'diag_left'
+export const WEAPON_DIR_DIAG_RIGHT = 'diag_right'
 
 

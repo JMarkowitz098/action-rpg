@@ -53,51 +53,93 @@ class Hero {
     }
 
     useWeapon(){
-        this.weapon.color = CONSTANTS.WEAPON_COLOR
-        this.weapon.x = this.getWeaponPos().x
-        this.weapon.y = this.getWeaponPos().y
-        setTimeout(this.putAwayWeapon, 50)
+        this.weapon.dir = this.getWeaponDir()
+        const { newX, newY } = this.getNewPosUsingDir(this.weapon.dir)
+        if (this.isInCanvas(this.dir, newX, newY)) {
+            this.weapon.color = CONSTANTS.WEAPON_COLOR
+            this.weapon.x = newX
+            this.weapon.y = newY
+            setTimeout(this.putAwayWeapon, 50)
+        }
     }
 
-    getWeaponPos(){
-        const { x, y, dir } = this
-        let dist = (CONSTANTS.HERO_SIZE - CONSTANTS.WEAPON_SIZE) / 2
-        let diagDist = (CONSTANTS.WEAPON_DIST / 2) * Math.sqrt(2)
-        let newX = x + dist
-        let newY = y + dist
+    getWeaponDir(){
+        switch (this.dir) {
+            case CONSTANTS.DIR_UP:
+            case CONSTANTS.DIR_DOWN:
+                return CONSTANTS.WEAPON_DIR_HORIZONTAL
+            case CONSTANTS.DIR_LEFT:
+            case CONSTANTS.DIR_RIGHT:
+                return CONSTANTS.WEAPON_DIR_VERTICAL
+            case CONSTANTS.DIR_LEFT_UP:
+            case CONSTANTS.DIR_DOWN_RIGHT:
+                return CONSTANTS.WEAPON_DIR_DIAG_RIGHT
+            case CONSTANTS.DIR_RIGHT_UP:
+            case CONSTANTS.DIR_DOWN_LEFT:
+                return CONSTANTS.WEAPON_DIR_DIAG_LEFT
+                
+                
+                
+        }
+    }
+
+    getNewPosUsingDir(type){
+        const { x, y, dir, vel } = this;
+        let newX, newY, delta, diagDelta
+
+        if (type === 'heroMovement'){
+            newX = x;
+            newY = y;
+            delta = CONSTANTS.HERO_MOVE_LENGTH * vel
+            diagDelta = delta
+        } else if(type === CONSTANTS.WEAPON_DIR_VERTICAL) {
+            let distX = (CONSTANTS.HERO_SIZE - CONSTANTS.WEAPON_WIDTH) / 2
+            let distY = (CONSTANTS.HERO_SIZE - CONSTANTS.WEAPON_LENGTH) / 2
+            newX = x + distX
+            newY = y + distY
+            delta = CONSTANTS.WEAPON_DIST
+            diagDelta = (CONSTANTS.WEAPON_DIST / 2) * Math.sqrt(2)
+        } else if(type === CONSTANTS.WEAPON_DIR_HORIZONTAL){
+            let distX = (CONSTANTS.WEAPON_LENGTH - CONSTANTS.HERO_SIZE) / 2
+            let distY = y
+            newX = x - distX
+            newY = y
+            delta = CONSTANTS.WEAPON_DIST
+            diagDelta = (CONSTANTS.WEAPON_DIST / 2) * Math.sqrt(2)
+        }
 
         switch (dir) {
             case CONSTANTS.DIR_UP:
-                newY = newY - CONSTANTS.WEAPON_DIST
+                newY = newY - delta
                 break;
             case CONSTANTS.DIR_DOWN:
-                newY = newY + CONSTANTS.WEAPON_DIST
+                newY = newY + delta
                 break;
             case CONSTANTS.DIR_LEFT:
-                newX = newX - CONSTANTS.WEAPON_DIST
+                newX = newX - delta
                 break;
             case CONSTANTS.DIR_RIGHT:
-                newX = newX + CONSTANTS.WEAPON_DIST
+                newX = newX + delta
                 break;
             case CONSTANTS.DIR_LEFT_UP:
-                newX = newX - diagDist
-                newY = newY - diagDist
+                newX = newX - diagDelta
+                newY = newY - diagDelta
                 break;
             case CONSTANTS.DIR_RIGHT_UP:
-                newX = newX + diagDist
-                newY = newY - diagDist
+                newX = newX + diagDelta
+                newY = newY - diagDelta
                 break;
             case CONSTANTS.DIR_DOWN_LEFT:
-                newX = newX - diagDist
-                newY = newY + diagDist
+                newX = newX - diagDelta
+                newY = newY + diagDelta
                 break;
             case CONSTANTS.DIR_DOWN_RIGHT:
-                newX = newX + diagDist
-                newY = newY + diagDist
+                newX = newX + diagDelta
+                newY = newY + diagDelta
                 break;
         }
 
-        return ({x: newX, y: newY})
+        return ({newX, newY})
     }
 
     putAwayWeapon(){
@@ -107,41 +149,9 @@ class Hero {
     }
 
     move(){
-        const { x, y, dir, vel } = this;
-        let newX = x
-        let newY = y;
-        switch (dir) {
-            case CONSTANTS.DIR_UP:
-                newY = y - CONSTANTS.HERO_MOVE_LENGTH * vel
-                break;
-            case CONSTANTS.DIR_DOWN:
-                newY = y + CONSTANTS.HERO_MOVE_LENGTH * vel
-                break;
-            case CONSTANTS.DIR_LEFT:
-                newX = x - CONSTANTS.HERO_MOVE_LENGTH * vel
-                break;
-            case CONSTANTS.DIR_RIGHT:
-                newX = x + CONSTANTS.HERO_MOVE_LENGTH * vel
-                break;
-            case CONSTANTS.DIR_LEFT_UP:
-                newX = x - CONSTANTS.HERO_MOVE_LENGTH * vel
-                newY = y - CONSTANTS.HERO_MOVE_LENGTH * vel
-                break;
-            case CONSTANTS.DIR_RIGHT_UP:
-                newX = x + CONSTANTS.HERO_MOVE_LENGTH * vel
-                newY = y - CONSTANTS.HERO_MOVE_LENGTH * vel
-                break;
-            case CONSTANTS.DIR_DOWN_LEFT:
-                newX = x - CONSTANTS.HERO_MOVE_LENGTH * vel
-                newY = y + CONSTANTS.HERO_MOVE_LENGTH * vel
-                break;
-            case CONSTANTS.DIR_DOWN_RIGHT:
-                newX = x + CONSTANTS.HERO_MOVE_LENGTH * vel
-                newY = y + CONSTANTS.HERO_MOVE_LENGTH * vel
-                break;
-        }
+        const { newX, newY } = this.getNewPosUsingDir('heroMovement')
 
-        if (this.validMove(dir, newX, newY)) {
+        if (this.isInCanvas(this.dir, newX, newY)) {
             this.x = newX
             this.y = newY
         }
@@ -159,7 +169,7 @@ class Hero {
             : newY <= CONSTANTS.CANVAS_DOWN_BOUNDARY - CONSTANTS.HERO_SIZE
     }
 
-    validMove(dir, newX, newY){
+    isInCanvas(dir, newX, newY){
         return dir.split(" ").every(dir => {
             return (dir === 'up' || dir === 'down') 
                 ? this.validYMove(dir, newY)
