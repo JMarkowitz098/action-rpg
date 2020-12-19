@@ -36,23 +36,16 @@ class Hero {
     }
 
     collidedWith(enemyPos){
-        let enemyX = enemyPos.x
-        let enemyY = enemyPos.y
-        let enemyLeft = enemyX - CONSTANTS.ENEMY_SIZE
-        let enemyRight = enemyX + CONSTANTS.ENEMY_SIZE
-        let enemyUp = enemyY - CONSTANTS.ENEMY_SIZE
-        let enemyDown = enemyY + CONSTANTS.ENEMY_SIZE
+        const enemyX = enemyPos.x - CONSTANTS.ENEMY_SIZE
+        const enemyY = enemyPos.y - CONSTANTS.ENEMY_SIZE
+        const enemyWidth = CONSTANTS.ENEMY_SIZE * 2
+        const heroWidth = CONSTANTS.HERO_SIZE
 
-        // debugger
-
-        // console.log({x: this.x, y: this.y})
-        // console.log({enemyLeft, enemyDown, enemyRight, enemyUp})
-
-        return (this.x > enemyLeft 
-            && this.x < enemyRight
-            && this.y < enemyUp
-            && this.y < enemyDown
-        )
+        // Detect if 2 rectngles have collided
+        return (this.x < enemyX + enemyWidth &&
+            this.x + heroWidth > enemyX &&
+            this.y < enemyY + enemyWidth &&
+            this.y + heroWidth > enemyY) 
     }
 
     move(){

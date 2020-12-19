@@ -18,6 +18,17 @@ class Enemy {
         ctx.beginPath();
         ctx.arc(x, y, length, 0, 2 * Math.PI);
         ctx.fill();
+
+
+        // Draw hit box
+        ctx.strokeStyle = "green";
+        ctx.rect(
+            x - CONSTANTS.ENEMY_SIZE, 
+            y - CONSTANTS.ENEMY_SIZE, 
+            CONSTANTS.ENEMY_SIZE * 2, 
+            CONSTANTS.ENEMY_SIZE * 2
+        );
+        ctx.stroke();
     }
 
     changeDir() {

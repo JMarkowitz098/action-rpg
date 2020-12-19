@@ -25,7 +25,7 @@ class GameRenderer {
         gameCanvas.hero.move();
         gameCanvas.drawEnemies(ctx);
         gameCanvas.moveEnemies(ctx);
-        console.log(gameCanvas.checkForCollisions())
+        gameCanvas.checkForCollisions()
 
         requestAnimationFrame(this.step)
     }

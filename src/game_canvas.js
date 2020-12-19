@@ -48,7 +48,12 @@ class GameCanvas {
     }
 
     checkForCollisions(){
-        return this.enemies.some(enemy => this.hero.collidedWith(enemy) === true)
+        let collided = this.enemies.some(enemy => this.hero.collidedWith(enemy))
+        if (collided) {
+            this.hero.color = 'purple'
+            setTimeout(() => this.hero.color = 'blue', 3000)
+        }
+        return collided
     }
 
     changeEnemyDirections(){
