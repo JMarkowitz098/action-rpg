@@ -42,7 +42,7 @@ export const DIR_OPTIONS = {
 export const ENEMY_SIZE = UNIT * 3
 export const ENEMY_COLOR = 'red'
 export const ENEMY_MOVE_LENGTH = 2
-export const ENEMY_SPAWN_RATE = 2000
+export const ENEMY_SPAWN_RATE = 1000
 
 export const HERO_COLOR = 'blue';
 export const HERO_DASH_KEY = 'z';

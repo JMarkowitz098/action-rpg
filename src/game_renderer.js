@@ -17,19 +17,23 @@ class GameRenderer {
         requestAnimationFrame(this.step)
     }
 
+    gameOver(gameCanvas) {
+        const { hero, enemies } = gameCanvas
+        return enemies.some(enemy => hero.collidedWith(enemy))
+    }
+
     step() {
-        const { gameCanvas, ctx } = this;
+        const { gameCanvas, ctx, gameOver } = this;
         gameCanvas.clearCanvas(ctx)
 
         gameCanvas.hero.draw(ctx);
         gameCanvas.hero.move();
         gameCanvas.drawEnemies(ctx);
-        // gameCanvas.moveEnemies(ctx);
+        gameCanvas.moveEnemies(ctx);
         gameCanvas.checkForCollisions()
-        // gameCanvas.hero.weapon.draw(ctx)
         gameCanvas.drawWeapon(ctx)
 
-        requestAnimationFrame(this.step)
+        if (!gameOver(gameCanvas)) requestAnimationFrame(this.step)
     }
 
     onKeyUp(e){

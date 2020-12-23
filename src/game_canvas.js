@@ -64,7 +64,10 @@ class GameCanvas {
         this.enemies.forEach((enemy, idx) => {
             if (this.hero.weapon.collidedWith(enemy)) enemyIdxs.push(idx)
         })
-        enemyIdxs.forEach(idx => this.enemies.splice(idx, 1))
+        enemyIdxs.forEach(idx => {
+            this.enemies.splice(idx, 1)
+            this.increaseScore()
+        })
     }
 
     changeEnemyDirections(){
@@ -72,6 +75,15 @@ class GameCanvas {
             const randSecond = Math.floor(Math.random() * 3000)
             setTimeout(enemy.changeDir,randSecond)
         })
+    }
+
+    increaseScore(){
+        let scoreEle = document.getElementById('score')
+        let scoreStr = scoreEle.innerHTML
+        let score = parseInt(scoreStr.split(':')[1])
+        score += 1
+        scoreEle.innerHTML = `Score: ${score}`;
+
     }
 
     clearCanvas() {
