@@ -1,6 +1,6 @@
 import GameCanvas from './game_canvas'
 import GameRenderer from './game_renderer'
-import * as CONSTANTS from './constants'
+import * as C from './constants'
 
 document.addEventListener("DOMContentLoaded", () => {
     const canvasEl = document.getElementById("game-canvas")
@@ -11,6 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gameRenderer.start()
     setInterval(gameCanvas.changeEnemyDirections, 1000);
-    setInterval(gameCanvas.placeNewEnemy, CONSTANTS.ENEMY_SPAWN_RATE);
+    setInterval(gameCanvas.placeNewEnemy, C.ENEMY_SPAWN_RATE);
 
 });

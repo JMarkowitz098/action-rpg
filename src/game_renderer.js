@@ -1,8 +1,8 @@
-import * as CONSTANTS from './constants'
+import * as C from './constants'
 
 class GameRenderer {
     constructor({ ctx, gameCanvas }) {
-        this.dirOptions = CONSTANTS.DIR_OPTIONS
+        this.dirOptions = C.DIR_OPTIONS
         this.ctx = ctx
         this.gameCanvas = gameCanvas
         this.keysDown = {}
@@ -19,19 +19,22 @@ class GameRenderer {
 
     gameOver(gameCanvas) {
         const { hero, enemies } = gameCanvas
-        return enemies.some(enemy => hero.collidedWith(enemy))
+        return hero.health.length === 0;
     }
 
     step() {
         const { gameCanvas, ctx, gameOver } = this;
+        
+        gameCanvas.hero.move();
+        gameCanvas.moveEnemies();
+        gameCanvas.checkForCollisions()
+        
         gameCanvas.clearCanvas(ctx)
 
         gameCanvas.hero.draw();
-        gameCanvas.hero.move();
+        gameCanvas.hero.weapon.draw();
+        gameCanvas.drawHealth();
         gameCanvas.drawEnemies();
-        gameCanvas.moveEnemies();
-        gameCanvas.checkForCollisions()
-        gameCanvas.hero.weapon.draw()
 
         if (!gameOver(gameCanvas)) requestAnimationFrame(this.step)
     }
@@ -47,7 +50,7 @@ class GameRenderer {
         if (Object.values(this.keysDown).every(val => val === false))
             gameCanvas.hero.changeVel(0)
 
-        if(e.key === CONSTANTS.HERO_DASH_KEY)
+        if(e.key === C.HERO_DASH_KEY)
             gameCanvas.hero.changeVel(1)
         
     }
@@ -61,7 +64,7 @@ class GameRenderer {
             gameCanvas.hero.changeDir(keysDown)
         }
 
-        if (e.key === CONSTANTS.HERO_DASH_KEY) {
+        if (e.key === C.HERO_DASH_KEY) {
             gameCanvas.hero.changeVel(3)
             gameCanvas.hero.changeDir(keysDown)
         }

@@ -1,12 +1,12 @@
-import * as CONSTANTS from './constants'
+import * as C from './constants'
 import GameObject from './game_object'
 
 const getRandomDir = (oldDir = '') => {
-        let randIdx = Math.floor(Math.random() * CONSTANTS.DIR_POSSIBLE_MOVES.length)
-        let newDir = CONSTANTS.DIR_POSSIBLE_MOVES[randIdx]
+        let randIdx = Math.floor(Math.random() * C.DIR_POSSIBLE_MOVES.length)
+        let newDir = C.DIR_POSSIBLE_MOVES[randIdx]
         while(oldDir === newDir){
-            randIdx = Math.floor(Math.random() * CONSTANTS.DIR_POSSIBLE_MOVES.length)
-            newDir = CONSTANTS.DIR_POSSIBLE_MOVES[randIdx]
+            randIdx = Math.floor(Math.random() * C.DIR_POSSIBLE_MOVES.length)
+            newDir = C.DIR_POSSIBLE_MOVES[randIdx]
         }
         return newDir
 }
@@ -15,13 +15,13 @@ class Enemy extends GameObject {
     constructor(attributes) {
         attributes = { 
             ...attributes, 
-            vel: CONSTANTS.ENEMY_START_VEL, 
+            vel: C.ENEMY_START_VEL, 
             dir: getRandomDir(),
-            color: CONSTANTS.ENEMY_COLOR
+            color: C.ENEMY_COLOR
         }
         super(attributes)
 
-        this.length = CONSTANTS.ENEMY_SIZE
+        this.length = C.ENEMY_SIZE
         this.changeDir = this.changeDir.bind(this)
     }
 
@@ -33,14 +33,17 @@ class Enemy extends GameObject {
         ctx.arc(x, y, length, 0, 2 * Math.PI);
         ctx.fill();
 
+        // this.drawHitBox()
+    }
 
-        // Draw hit box
+    drawHitBox(){
+        const { x, y, ctx } = this;
         ctx.strokeStyle = "green";
         ctx.rect(
-            x - CONSTANTS.ENEMY_SIZE, 
-            y - CONSTANTS.ENEMY_SIZE, 
-            CONSTANTS.ENEMY_SIZE * 2, 
-            CONSTANTS.ENEMY_SIZE * 2
+            x - C.ENEMY_SIZE,
+            y - C.ENEMY_SIZE,
+            C.ENEMY_SIZE * 2,
+            C.ENEMY_SIZE * 2
         );
         ctx.stroke();
     }
@@ -54,7 +57,7 @@ class Enemy extends GameObject {
     }
 
     die() {
-        this.color = CONSTANTS.CANVAS_OUTSIDE_COLOR
+        this.color = C.CANVAS_OUTSIDE_COLOR
         this.x = null;
         this.y = null;
     }
@@ -64,33 +67,33 @@ class Enemy extends GameObject {
         let newX = x
         let newY = y;
         switch (dir) {
-            case CONSTANTS.DIR_UP:
-                newY = y - CONSTANTS.ENEMY_MOVE_LENGTH * vel
+            case C.DIR_UP:
+                newY = y - C.ENEMY_MOVE_LENGTH * vel
                 break;
-            case CONSTANTS.DIR_DOWN:
-                newY = y + CONSTANTS.ENEMY_MOVE_LENGTH * vel
+            case C.DIR_DOWN:
+                newY = y + C.ENEMY_MOVE_LENGTH * vel
                 break;
-            case CONSTANTS.DIR_LEFT:
-                newX = x - CONSTANTS.ENEMY_MOVE_LENGTH * vel
+            case C.DIR_LEFT:
+                newX = x - C.ENEMY_MOVE_LENGTH * vel
                 break;
-            case CONSTANTS.DIR_RIGHT:
-                newX = x + CONSTANTS.ENEMY_MOVE_LENGTH * vel
+            case C.DIR_RIGHT:
+                newX = x + C.ENEMY_MOVE_LENGTH * vel
                 break;
-            case CONSTANTS.DIR_LEFT_UP:
-                newX = x - CONSTANTS.ENEMY_MOVE_LENGTH * vel
-                newY = y - CONSTANTS.ENEMY_MOVE_LENGTH * vel
+            case C.DIR_LEFT_UP:
+                newX = x - C.ENEMY_MOVE_LENGTH * vel
+                newY = y - C.ENEMY_MOVE_LENGTH * vel
                 break;
-            case CONSTANTS.DIR_RIGHT_UP:
-                newX = x + CONSTANTS.ENEMY_MOVE_LENGTH * vel
-                newY = y - CONSTANTS.ENEMY_MOVE_LENGTH * vel
+            case C.DIR_RIGHT_UP:
+                newX = x + C.ENEMY_MOVE_LENGTH * vel
+                newY = y - C.ENEMY_MOVE_LENGTH * vel
                 break;
-            case CONSTANTS.DIR_DOWN_LEFT:
-                newX = x - CONSTANTS.ENEMY_MOVE_LENGTH * vel
-                newY = y + CONSTANTS.ENEMY_MOVE_LENGTH * vel
+            case C.DIR_DOWN_LEFT:
+                newX = x - C.ENEMY_MOVE_LENGTH * vel
+                newY = y + C.ENEMY_MOVE_LENGTH * vel
                 break;
-            case CONSTANTS.DIR_DOWN_RIGHT:
-                newX = x + CONSTANTS.ENEMY_MOVE_LENGTH * vel
-                newY = y + CONSTANTS.ENEMY_MOVE_LENGTH * vel
+            case C.DIR_DOWN_RIGHT:
+                newX = x + C.ENEMY_MOVE_LENGTH * vel
+                newY = y + C.ENEMY_MOVE_LENGTH * vel
                 break;
         }
 
@@ -104,25 +107,25 @@ class Enemy extends GameObject {
     }
 
     getRandomDir(oldDir){
-        let randIdx = Math.floor(Math.random() * CONSTANTS.DIR_POSSIBLE_MOVES.length)
-        let newDir = CONSTANTS.DIR_POSSIBLE_MOVES[randIdx]
+        let randIdx = Math.floor(Math.random() * C.DIR_POSSIBLE_MOVES.length)
+        let newDir = C.DIR_POSSIBLE_MOVES[randIdx]
         while(oldDir === newDir){
-            randIdx = Math.floor(Math.random() * CONSTANTS.DIR_POSSIBLE_MOVES.length)
-            newDir = CONSTANTS.DIR_POSSIBLE_MOVES[randIdx]
+            randIdx = Math.floor(Math.random() * C.DIR_POSSIBLE_MOVES.length)
+            newDir = C.DIR_POSSIBLE_MOVES[randIdx]
         }
         return newDir
     }
 
     validXMove(dir, newX) {
         return dir === 'left'
-            ? newX >= CONSTANTS.CANVAS_LEFT_BOUNDARY + 25
-            : newX <= CONSTANTS.CANVAS_RIGHT_BOUNDARY - CONSTANTS.ENEMY_SIZE
+            ? newX >= C.CANVAS_LEFT_BOUNDARY + 25
+            : newX <= C.CANVAS_RIGHT_BOUNDARY - C.ENEMY_SIZE
     }
 
     validYMove(dir, newY) {
         return dir === 'up'
-            ? newY >= CONSTANTS.CANVAS_UP_BOUNDARY + 25
-            : newY <= CONSTANTS.CANVAS_DOWN_BOUNDARY - CONSTANTS.ENEMY_SIZE
+            ? newY >= C.CANVAS_UP_BOUNDARY + 25
+            : newY <= C.CANVAS_DOWN_BOUNDARY - C.ENEMY_SIZE
     }
 
     validMove(dir, newX, newY) {

@@ -1,6 +1,7 @@
 import * as C from './constants'
 import Weapon from './weapon'
 import GameObject from './game_object'
+import Health from './health'
 
 class Hero extends GameObject {
     constructor(attributes){
@@ -13,6 +14,7 @@ class Hero extends GameObject {
         super(attributes)
 
         this.length = C.HERO_SIZE
+        this.health = this.createStartingHealth(C.HERO_START_HEALTH)
         this.weapon = new Weapon({ctx: attributes.ctx})
 
         this.putAwayWeapon = this.putAwayWeapon.bind(this)
@@ -27,6 +29,34 @@ class Hero extends GameObject {
 
     dash(keysDown){
         this.changeDir(keysDown, C.HERO_DASH_VEL)
+    }
+
+    createStartingHealth(numHealth){
+        let health = []
+
+        for(let i = 0; i < numHealth; i++){
+            let attributes = {
+                pos: {
+                    x: (40 * i + C.HEALTH_START_X),
+                    y: C.HEALTH_START_Y
+                },
+                ctx: this.ctx
+            }
+            let heart = new Health(attributes)
+            health.push(heart)
+        }
+
+        return health
+    }
+
+    decreaseHealth(){
+        this.health.pop();
+        this.color = 'purple'
+        setTimeout(() => this.color = C.HERO_COLOR, 3000)
+    }
+    
+    isVulnerable(){
+        return this.color === C.HERO_COLOR
     }
 
     changeDir(keysDown){

@@ -1,4 +1,3 @@
-import * as CONSTANTS from './constants'
 
 class GameObject {
     constructor({ctx, pos, vel, dir, color}){
@@ -9,7 +8,7 @@ class GameObject {
         this.dir = dir
         this.color = color
 
-        this.isColliding = false;
+        // this.isColliding = false;
     }
 }
 

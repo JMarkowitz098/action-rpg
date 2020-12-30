@@ -1,32 +1,31 @@
-import * as CONSTANTS from './constants'
+import * as C from './constants'
 import GameObject from './game_object'
 
 class Weapon extends GameObject {
     constructor(attributes){
         attributes = {
             ...attributes,
-            color: CONSTANTS.CANVAS_COLOR,
-            dir: CONSTANTS.WEAPON_DIR_VERTICAL,
+            color: C.CANVAS_COLOR,
             pos: {}
         }
         super(attributes)
 
-        this.length = CONSTANTS.WEAPON_LENGTH
-        this.width = CONSTANTS.WEAPON_WIDTH
+        this.length = C.WEAPON_LENGTH
+        this.width = C.WEAPON_WIDTH
     }
 
     draw(){
         switch (this.dir) {
-            case CONSTANTS.WEAPON_DIR_VERTICAL:
+            case C.WEAPON_DIR_VERTICAL:
                 this.drawVertically()
                 break;
-            case CONSTANTS.WEAPON_DIR_HORIZONTAL:
+            case C.WEAPON_DIR_HORIZONTAL:
                 this.drawHorizontally()
                 break;
-            case CONSTANTS.DIR_LEFT_UP:
+            case C.DIR_LEFT_UP:
                 this.drawLeftUp()
                 break;
-            case CONSTANTS.DIR_DOWN_RIGHT:
+            case C.DIR_DOWN_RIGHT:
                 this.drawDownRight()
                 break;
         }
@@ -73,13 +72,13 @@ class Weapon extends GameObject {
     }
 
     collidedWith(enemyPos) {
-        const enemyX = enemyPos.x - CONSTANTS.ENEMY_SIZE
-        const enemyY = enemyPos.y - CONSTANTS.ENEMY_SIZE
-        const enemyWidth = CONSTANTS.ENEMY_SIZE * 2
-        const weaponWidth = this.dir === CONSTANTS.WEAPON_DIR_VERTICAL 
-            ? CONSTANTS.WEAPON_WIDTH : CONSTANTS.WEAPON_LENGTH
-        const weaponLength = this.dir === CONSTANTS.WEAPON_DIR_VERTICAL
-            ? CONSTANTS.WEAPON_LENGTH : CONSTANTS.WEAPON_WIDTH
+        const enemyX = enemyPos.x - C.ENEMY_SIZE
+        const enemyY = enemyPos.y - C.ENEMY_SIZE
+        const enemyWidth = C.ENEMY_SIZE * 2
+        const weaponWidth = this.dir === C.WEAPON_DIR_VERTICAL 
+            ? C.WEAPON_WIDTH : C.WEAPON_LENGTH
+        const weaponLength = this.dir === C.WEAPON_DIR_VERTICAL
+            ? C.WEAPON_LENGTH : C.WEAPON_WIDTH
 
         // Detect if 2 rectangles have collided
         return (this.x < enemyX + enemyWidth &&
