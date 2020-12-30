@@ -26,12 +26,12 @@ class GameRenderer {
         const { gameCanvas, ctx, gameOver } = this;
         gameCanvas.clearCanvas(ctx)
 
-        gameCanvas.hero.draw(ctx);
+        gameCanvas.hero.draw();
         gameCanvas.hero.move();
-        gameCanvas.drawEnemies(ctx);
-        gameCanvas.moveEnemies(ctx);
+        gameCanvas.drawEnemies();
+        gameCanvas.moveEnemies();
         gameCanvas.checkForCollisions()
-        gameCanvas.drawWeapon(ctx)
+        gameCanvas.hero.weapon.draw()
 
         if (!gameOver(gameCanvas)) requestAnimationFrame(this.step)
     }

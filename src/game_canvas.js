@@ -20,7 +20,7 @@ const getRandPos = () => {
 class GameCanvas {
     constructor({ ctx }) {
         this.ctx = ctx;
-        this.hero = new Hero({ pos: CONSTANTS.HERO_START_POS })
+        this.hero = new Hero({ pos: CONSTANTS.HERO_START_POS, ctx })
         this.enemies = []
 
         this.clearCanvas = this.clearCanvas.bind(this)
@@ -29,23 +29,20 @@ class GameCanvas {
     }
 
     placeNewEnemy() {
-        const { hero } = this;
+        const { hero, ctx } = this;
         let pos = getRandPos()
         while (pos.x === hero.x && pos.y === hero.y) pos = getRandPos()
         let enemy = new Enemy({
             size: CONSTANTS.ENEMY_SIZE,
             color: CONSTANTS.ENEMY_COLOR,
-            pos
+            pos,
+            ctx
         })
         this.enemies.push(enemy)
     }
 
-    drawEnemies(ctx){
-        this.enemies.forEach(enemy => enemy.draw(ctx))
-    }
-
-    drawWeapon(ctx){
-        this.hero.weapon.draw(ctx)
+    drawEnemies(){
+        this.enemies.forEach(enemy => enemy.draw())
     }
 
     moveEnemies(){

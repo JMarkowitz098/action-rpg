@@ -1,18 +1,32 @@
 import * as CONSTANTS from './constants'
+import GameObject from './game_object'
 
-class Enemy {
-    constructor({ pos }) {
+const getRandomDir = (oldDir = '') => {
+        let randIdx = Math.floor(Math.random() * CONSTANTS.DIR_POSSIBLE_MOVES.length)
+        let newDir = CONSTANTS.DIR_POSSIBLE_MOVES[randIdx]
+        while(oldDir === newDir){
+            randIdx = Math.floor(Math.random() * CONSTANTS.DIR_POSSIBLE_MOVES.length)
+            newDir = CONSTANTS.DIR_POSSIBLE_MOVES[randIdx]
+        }
+        return newDir
+}
+
+class Enemy extends GameObject {
+    constructor(attributes) {
+        attributes = { 
+            ...attributes, 
+            vel: CONSTANTS.ENEMY_START_VEL, 
+            dir: getRandomDir(),
+            color: CONSTANTS.ENEMY_COLOR
+        }
+        super(attributes)
+
         this.length = CONSTANTS.ENEMY_SIZE
-        this.color = CONSTANTS.ENEMY_COLOR
-        this.x = pos.x,
-        this.y = pos.y
-        this.vel = 1
-        this.dir = this.getRandomDir()
         this.changeDir = this.changeDir.bind(this)
     }
 
-    draw(ctx) {
-        const { length, color, x, y } = this
+    draw() {
+        const { length, color, x, y, ctx } = this
         ctx.fillStyle = color;
 
         ctx.beginPath();
@@ -32,7 +46,7 @@ class Enemy {
     }
 
     changeDir() {
-        this.dir = this.getRandomDir()
+        this.dir = getRandomDir()
     }
 
     changeVel(vel) {

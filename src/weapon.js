@@ -1,55 +1,70 @@
 import * as CONSTANTS from './constants'
+import GameObject from './game_object'
 
-class Weapon {
-    constructor(){
-        this.x
-        this.y
-        this.color = CONSTANTS.CANVAS_COLOR
+class Weapon extends GameObject {
+    constructor(attributes){
+        attributes = {
+            ...attributes,
+            color: CONSTANTS.CANVAS_COLOR,
+            dir: CONSTANTS.WEAPON_DIR_VERTICAL,
+            pos: {}
+        }
+        super(attributes)
+
         this.length = CONSTANTS.WEAPON_LENGTH
         this.width = CONSTANTS.WEAPON_WIDTH
-        this.dir = CONSTANTS.WEAPON_DIR_VERTICAL
     }
 
-    draw(ctx){
+    draw(){
         switch (this.dir) {
             case CONSTANTS.WEAPON_DIR_VERTICAL:
-                this.drawVertically(ctx)
+                this.drawVertically()
                 break;
             case CONSTANTS.WEAPON_DIR_HORIZONTAL:
-                this.drawHorizontally(ctx)
+                this.drawHorizontally()
                 break;
-            case CONSTANTS.WEAPON_DIR_DIAG_RIGHT:
-                this.drawHorizontally(ctx)
-                // this.drawDiagonallyRight(ctx)
+            case CONSTANTS.DIR_LEFT_UP:
+                this.drawLeftUp()
+                break;
+            case CONSTANTS.DIR_DOWN_RIGHT:
+                this.drawDownRight()
                 break;
         }
     }
 
-    drawHorizontally(ctx){
-        const { length, width, color, x, y } = this
+    drawHorizontally(){
+        const { length, width, color, x, y, ctx } = this
         ctx.fillStyle = color;
 
         ctx.fillRect(x, y, length, width);
     }
 
-    drawVertically(ctx){
-        const { length, width, color, x, y } = this
+    drawVertically(){
+        const { length, width, color, x, y, ctx } = this
         ctx.fillStyle = color;
 
         ctx.fillRect(x, y, width, length);
     }
 
-    drawDiagonallyRight(ctx){
-        const { length, width, color, x, y } = this
+    drawLeftUp(){
+        const { length, width, color, x, y, ctx } = this
         ctx.fillStyle = color;
 
-        // ctx.fillRect(x, y, width, length);
+        // Point of transform origin
+        ctx.translate(x, y);
+        ctx.rotate(45 * Math.PI / 180);
+        ctx.fillRect(0, 0, width, length);
 
+        // Reset transformation matrix to the identity matrix
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+    }
 
-
+    drawDownRight() {
+        const { length, width, color, x, y, ctx } = this
+        ctx.fillStyle = color;
 
         // Point of transform origin
-        ctx.translate(x + 30, y + 30);
+        ctx.translate(x, y);
         ctx.rotate(45 * Math.PI / 180);
         ctx.fillRect(0, 0, width, length);
 

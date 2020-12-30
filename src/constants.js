@@ -43,6 +43,7 @@ export const ENEMY_SIZE = UNIT * 3
 export const ENEMY_COLOR = 'red'
 export const ENEMY_MOVE_LENGTH = 2
 export const ENEMY_SPAWN_RATE = 1000
+export const ENEMY_START_VEL = 1
 
 export const HERO_COLOR = 'blue';
 export const HERO_DASH_KEY = 'z';
@@ -50,6 +51,7 @@ export const HERO_DASH_VEL = 3;
 export const HERO_SIZE = UNIT * 5;
 export const HERO_MOVE_LENGTH = 4;
 export const HERO_START_POS = { x: CANVAS_START_POS, y: CANVAS_START_POS}
+export const HERO_START_DIR = DIR_DOWN
 export const HERO_MOVEMENT = 'hero_movement' 
 
 export const WEAPON_COLOR = 'green'
