@@ -60,13 +60,24 @@ class Hero extends GameObject {
     }
 
     changeDir(keysDown){
-        let newDir = Object.entries(keysDown)
-        .filter(([key, val]) => val)
-        .map(([key, val]) => key)
-        .sort()
-        .join(' ');
-        if (C.DIR_POSSIBLE_MOVES.includes(newDir))
-            this.dir = newDir;
+        let newDir = this.filterExtraKeys(Object.entries(keysDown))
+            .map(([key, val]) => key)
+            .sort()
+            .join(' ');
+
+        if (C.DIR_POSSIBLE_MOVES.includes(newDir)) this.dir = newDir;
+    }
+
+    filterExtraKeys(newDir){
+        let filtered = newDir.filter(([key, val]) => val)
+        if(filtered.length === 1) return filtered
+
+        if(filtered[0][0] === C.DIR_RIGHT && filtered[1][0] === C.DIR_LEFT)
+            filtered = filtered[0][0] === this.dir ? [filtered[1]] : [filtered[0]]
+        if (filtered[0][0] === C.DIR_DOWN && filtered[1][0] === C.DIR_UP) 
+            filtered = filtered[0][0] === this.dir ? [filtered[1]] : [filtered[0]]
+
+        return filtered
     }
 
     changeVel(vel){

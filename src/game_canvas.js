@@ -1,7 +1,6 @@
 import * as C from './constants'
 import Hero from './hero'
 import Enemy from './enemy'
-import Health from './health'
 
 const getRandPos = () => {
     const factor = C.CANVAS_SIDE_LENGTH / C.UNIT
@@ -56,7 +55,7 @@ class GameCanvas {
 
     checkForCollisions(){
         const { hero, enemies } = this;
-        
+
         let heroColidedWithEnemy = 
             enemies.some(enemy => hero.collidedWith(enemy))
         if (heroColidedWithEnemy && hero.isVulnerable()) hero.decreaseHealth();

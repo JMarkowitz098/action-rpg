@@ -45,6 +45,10 @@ class GameRenderer {
         if (dirOptions.hasOwnProperty(e.key)) {
             let dir = dirOptions[e.key]
             this.keysDown[dir] = false
+            let remainingKeys = 
+                Object.entries(this.keysDown).filter(([key, val]) => val)
+            if(remainingKeys.length > 0) 
+                gameCanvas.hero.changeDir(this.keysDown)
         }
 
         if (Object.values(this.keysDown).every(val => val === false))
