@@ -18,8 +18,7 @@ class GameRenderer {
     }
 
     gameOver(gameCanvas) {
-        const { hero, enemies } = gameCanvas
-        return hero.health.length === 0;
+        return gameCanvas.hero.health.length === 0;
     }
 
     step() {

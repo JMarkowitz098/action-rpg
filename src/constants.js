@@ -61,9 +61,9 @@ export const HERO_START_HEALTH = 3
 export const HERO_MOVEMENT = 'hero_movement' 
 
 export const WEAPON_COLOR = 'green'
-export const WEAPON_LENGTH = UNIT * 12
-export const WEAPON_WIDTH = UNIT * 6
-export const WEAPON_DIST = 40
+export const WEAPON_LENGTH = UNIT * 20
+export const WEAPON_WIDTH = UNIT * 12
+export const WEAPON_DIST = 60
 export const WEAPON_DIR_HORIZONTAL = 'horizontal'
 export const WEAPON_DIR_VERTICAL = 'vertical'
 export const WEAPON_DIR_DIAG_LEFT = 'diag_left'

@@ -117,13 +117,12 @@ class Hero extends GameObject {
             case C.DIR_RIGHT:
                 return C.WEAPON_DIR_VERTICAL
             default:
-                return this.dir
-
+                return C.WEAPON_DIR_HORIZONTAL
         }
     }
 
     getNewPosUsingDir(type){
-        const { oldX, oldY, delta, diagDelta } = this.getCoordInfo(type)
+        const { oldX, oldY, delta } = this.getCoordInfo(type)
         let newX = oldX
         let newY = oldY
 
@@ -141,20 +140,20 @@ class Hero extends GameObject {
                 newX = newX + delta
                 break;
             case C.DIR_LEFT_UP:
-                newX = newX - diagDelta
-                newY = newY - diagDelta
+                newX = newX - delta
+                newY = newY - delta
                 break;
             case C.DIR_RIGHT_UP:
-                newX = newX + diagDelta
-                newY = newY - diagDelta
+                newX = newX + delta
+                newY = newY - delta
                 break;
             case C.DIR_DOWN_LEFT:
-                newX = newX - diagDelta
-                newY = newY + diagDelta
+                newX = newX - delta
+                newY = newY + delta
                 break;
             case C.DIR_DOWN_RIGHT:
-                newX = newX + diagDelta
-                newY = newY + diagDelta
+                newX = newX + delta
+                newY = newY + delta
                 break;
         }
 
@@ -169,7 +168,6 @@ class Hero extends GameObject {
                 oldX = x;
                 oldY = y;
                 delta = C.HERO_MOVE_LENGTH * vel
-                diagDelta = delta
                 break;
             case C.WEAPON_DIR_VERTICAL:
                 oldX = x + (C.HERO_SIZE - C.WEAPON_WIDTH) / 2
@@ -178,20 +176,8 @@ class Hero extends GameObject {
                 break;
             case C.WEAPON_DIR_HORIZONTAL:
                 oldX = x - (C.WEAPON_LENGTH - C.HERO_SIZE) / 2
-                oldY = y
+                oldY = y - (C.WEAPON_WIDTH - C.HERO_SIZE) / 2
                 delta = C.WEAPON_DIST
-                break;
-            case C.DIR_LEFT_UP:
-                oldX = x - C.WEAPON_WIDTH * .2, 
-                oldY = y - C.WEAPON_LENGTH * .8
-                delta = 0
-                diagDelta = 0
-                break;
-            case C.DIR_DOWN_RIGHT:
-                oldX = x + C.HERO_SIZE + C.WEAPON_WIDTH * .8
-                oldY = y + C.HERO_SIZE * .6
-                delta = 0
-                diagDelta = 0
                 break;
         }
         
@@ -200,8 +186,8 @@ class Hero extends GameObject {
 
     putAwayWeapon(){
         this.weapon.color = 'white' // Outside of canvas color
-        this.weapon.x = null
-        this.weapon.y = null
+        this.weapon.x = C.CANVAS_RIGHT_BOUNDARY
+        this.weapon.y = C.CANVAS_DOWN_BOUNDARY
     }
 
     move(){
