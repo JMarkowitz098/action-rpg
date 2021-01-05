@@ -138,12 +138,10 @@ class Hero extends GameObject {
             vel: this.vel
         })
 
-        if (this.movement.isInCanvas(this.dir, newX, newY)) {
-            this.weapon.color = C.WEAPON_COLOR
-            this.weapon.x = newX
-            this.weapon.y = newY
-            setTimeout(this.weapon.putAway, 50)
-        }
+        this.weapon.color = C.WEAPON_COLOR
+        this.weapon.x = newX
+        this.weapon.y = newY
+        setTimeout(this.weapon.putAway, 50)
     }
 
     getSpriteDir(){
@@ -162,8 +160,6 @@ class Hero extends GameObject {
                 return C.HERO_SPRITE_FACING_UP
             case C.DIR_DOWN_LEFT:
             case C.DIR_DOWN_RIGHT:
-                return C.HERO_SPRITE_FACING_DOWN
-            default: //Catches diagonal for now
                 return C.HERO_SPRITE_FACING_DOWN
         }
     }
