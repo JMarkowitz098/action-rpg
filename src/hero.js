@@ -181,6 +181,11 @@ class Hero extends GameObject {
         this.spriteDirection = this.getSpriteDir()
         this.hasMoved = newPos.moved
     }
+
+    dash(){
+        this.changeVel(C.HERO_DASH_SPEED)
+        setTimeout(() => this.changeVel(1), C.HERO_DASH_TIME)
+    }
 }
 
 export default Hero

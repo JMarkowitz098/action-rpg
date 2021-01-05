@@ -62,6 +62,8 @@ export const HERO_START_POS = { x: CANVAS_START_POS, y: CANVAS_START_POS}
 export const HERO_START_DIR = DIR_DOWN
 export const HERO_START_HEALTH = 3
 export const HERO_MOVEMENT = 'hero_movement'
+export const HERO_DASH_SPEED = 8
+export const HERO_DASH_TIME = 50
 
 export const HERO_SPRITE_SCALE = 1
 export const HERO_SPRITE_WIDTH = 48

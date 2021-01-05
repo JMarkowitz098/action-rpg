@@ -52,12 +52,6 @@ class GameRenderer {
 
         if (Object.values(this.keysDown).every(val => val === false))
             gameCanvas.hero.changeVel(0)
-
-        if(e.key === C.HERO_DASH_KEY){
-            this.getMoveKeysDown().length > 0 
-                ? gameCanvas.hero.changeVel(1) : gameCanvas.hero.changeVel(0)
-        }
-        
     }
 
     onKeyDown(e) {
@@ -69,10 +63,8 @@ class GameRenderer {
             gameCanvas.hero.changeDir(keysDown)
         }
 
-        if (e.key === C.HERO_DASH_KEY) {
-            this.getMoveKeysDown().length > 0
-                ? gameCanvas.hero.changeVel(3) : gameCanvas.hero.changeVel(0)
-        }
+        if (e.key === C.HERO_DASH_KEY && this.getMoveKeysDown().length > 0)
+            gameCanvas.hero.dash()
 
         if (e.key === 'q')
             gameCanvas.placeNewEnemy()
