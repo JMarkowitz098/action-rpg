@@ -31,7 +31,7 @@ class GameCanvas {
     placeNewEnemy() {
         const { hero, ctx } = this;
         let pos = getRandPos()
-        while (pos.x === hero.x && pos.y === hero.y) pos = getRandPos()
+        while (hero.collidedWith({x: pos.x, y:pos.y})) pos = getRandPos()
         let enemy = new Enemy({
             size: C.ENEMY_SIZE,
             color: C.ENEMY_COLOR,

@@ -115,9 +115,9 @@ class Hero extends GameObject {
         this.vel = vel
     }
 
-    collidedWith(enemyPos){
-        const enemyX = enemyPos.x - C.ENEMY_SIZE
-        const enemyY = enemyPos.y - C.ENEMY_SIZE
+    collidedWith(enemy){
+        const enemyX = enemy.x - C.ENEMY_SIZE
+        const enemyY = enemy.y - C.ENEMY_SIZE
         const enemyWidth = C.ENEMY_SIZE * 2
         const heroWidth = C.HERO_WIDTH
         const heroLength = C.HERO_LENGTH
