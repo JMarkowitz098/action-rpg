@@ -18,17 +18,59 @@ class Hero extends GameObject {
         this.health = this.createStartingHealth(C.HERO_START_HEALTH)
         this.weapon = new Weapon({ctx: attributes.ctx})
         this.movement = new Movement()
+
+        this.initSprite()
     }
 
     draw() {
-        const { length, color, x, y, ctx } = this
-        ctx.fillStyle = color;
+        const { x, y, spriteDirection, hasMoved, spritePositions} = this
 
-        ctx.fillRect(x, y, length, length);
+        if(hasMoved) this.changeFrameAttributes()
+        this.drawFrame(
+            spritePositions[this.spritePositionsIdx], 
+            spriteDirection, 
+            x, y
+        );
     }
 
-    dash(keysDown){
-        this.changeDir(keysDown, C.HERO_DASH_VEL)
+    changeFrameAttributes(){
+        this.frameCount++;
+        if (this.frameCount >= C.FRAME_LIMIT) {
+            this.frameCount = 0;
+            this.changeSpritePositions()
+        }
+    }
+
+    changeSpritePositions(){
+        this.spritePositionsIdx++;
+        if (this.spritePositionsIdx >= this.spritePositions.length)
+            this.spritePositionsIdx = 0;
+    }
+
+    drawFrame(frameX, frameY, canvasX, canvasY) {
+        const { ctx, image } = this;
+        ctx.drawImage(
+            image, //image source
+            frameX * C.HERO_SPRITE_WIDTH, //sx
+            frameY * C.HERO_SPRITE_HEIGHT, //sy
+            C.HERO_SPRITE_WIDTH, //sWIDTH
+            C.HERO_SPRITE_HEIGHT, //sHEIGHT
+            canvasX, //dX
+            canvasY, //dY
+            C.HERO_SPRITE_SCALED_WIDTH, //dWIDTH
+            C.HERO_SPRITE_SCALED_HEIGHT //dHEIGHT
+        ); 
+    }
+
+    initSprite(){
+        let image = new Image
+        image.src = '/Users/jared/Desktop/Coding/action_rpg/Green-Cap-Character-16x18.png'
+        this.image = image
+        this.spriteDirection = C.HERO_SPRITE_FACING_DOWN
+        this.frameCount = 0;
+        this.spritePositions = [0, 1, 0, 2];
+        this.spritePositionsIdx = 0;
+        this.hasMoved = false;
     }
 
     createStartingHealth(numHealth){
@@ -60,24 +102,7 @@ class Hero extends GameObject {
     }
 
     changeDir(keysDown){
-        let newDir = this.filterExtraKeys(Object.entries(keysDown))
-            .map(([key, val]) => key)
-            .sort()
-            .join(' ');
-
-        if (C.DIR_POSSIBLE_MOVES.includes(newDir)) this.dir = newDir;
-    }
-
-    filterExtraKeys(newDir){
-        let filtered = newDir.filter(([key, val]) => val)
-        if(filtered.length === 1) return filtered
-
-        if(filtered[0][0] === C.DIR_RIGHT && filtered[1][0] === C.DIR_LEFT)
-            filtered = filtered[0][0] === this.dir ? [filtered[1]] : [filtered[0]]
-        if (filtered[0][0] === C.DIR_DOWN && filtered[1][0] === C.DIR_UP) 
-            filtered = filtered[0][0] === this.dir ? [filtered[1]] : [filtered[0]]
-
-        return filtered
+        this.dir = this.movement.changeDir(keysDown, this.dir)
     }
 
     changeVel(vel){
@@ -114,6 +139,22 @@ class Hero extends GameObject {
         }
     }
 
+    getSpriteDir(){
+        const { dir } =  this 
+        switch(dir){
+            case C.DIR_UP:
+                return C.HERO_SPRITE_FACING_UP
+            case C.DIR_DOWN:
+                return C.HERO_SPRITE_FACING_DOWN
+            case C.DIR_LEFT:
+                return C.HERO_SPRITE_FACING_LEFT
+            case C.DIR_RIGHT:
+                return C.HERO_SPRITE_FACING_RIGHT
+            default: //Catches diagonal for now
+                return C.HERO_SPRITE_FACING_DOWN
+        }
+    }
+
     move(){
         let newPos = this.movement.move({
             x: this.x,
@@ -124,6 +165,8 @@ class Hero extends GameObject {
 
         this.x = newPos.x
         this.y = newPos.y
+        this.spriteDirection = this.getSpriteDir()
+        this.hasMoved = newPos.moved
     }
 }
 

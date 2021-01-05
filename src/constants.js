@@ -45,6 +45,8 @@ export const ENEMY_MOVE_LENGTH = 2
 export const ENEMY_SPAWN_RATE = 1000
 export const ENEMY_START_VEL = 1
 
+export const FRAME_LIMIT = 15
+
 export const HEALTH_COLOR = 'pink'
 export const HEALTH_LENGTH = UNIT * 4
 export const HEALTH_START_X = CANVAS_LEFT_BOUNDARY + 10
@@ -58,7 +60,17 @@ export const HERO_MOVE_LENGTH = 4;
 export const HERO_START_POS = { x: CANVAS_START_POS, y: CANVAS_START_POS}
 export const HERO_START_DIR = DIR_DOWN
 export const HERO_START_HEALTH = 3
-export const HERO_MOVEMENT = 'hero_movement' 
+export const HERO_MOVEMENT = 'hero_movement'
+
+export const HERO_SPRITE_SCALE = 2
+export const HERO_SPRITE_WIDTH = 16
+export const HERO_SPRITE_HEIGHT = 18
+export const HERO_SPRITE_SCALED_WIDTH = HERO_SPRITE_WIDTH * HERO_SPRITE_SCALE
+export const HERO_SPRITE_SCALED_HEIGHT = HERO_SPRITE_HEIGHT * HERO_SPRITE_SCALE
+export const HERO_SPRITE_FACING_DOWN = 0;
+export const HERO_SPRITE_FACING_UP = 1;
+export const HERO_SPRITE_FACING_LEFT = 2;
+export const HERO_SPRITE_FACING_RIGHT = 3;
 
 export const WEAPON_COLOR = 'green'
 export const WEAPON_LENGTH = UNIT * 20

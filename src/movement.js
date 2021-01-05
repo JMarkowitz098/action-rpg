@@ -1,19 +1,37 @@
 import * as C from './constants'
 
 class Movement {
-    consturctor(){
-
+    constructor(){
     }
 
     move(moveData) {
         const { x, y, dir } = moveData;
         const { newX, newY } = this.getNewPosUsingDir(C.HERO_MOVEMENT, moveData)
 
-        if (this.isInCanvas(dir, newX, newY)) {
-            return { x: newX, y: newY }
-        } else {
-            return { x, y }
-        }
+        return this.isInCanvas(dir, newX, newY) 
+            ? { x: newX, y: newY, moved: (x !== newX || y !== newY) } 
+            : { x, y, moved: false }
+    }
+    
+    changeDir(keysDown, dir){
+        let newDir = this.filterExtraKeys(Object.entries(keysDown), dir)
+            .map(([key, val]) => key)
+            .sort()
+            .join(' ');
+
+        return C.DIR_POSSIBLE_MOVES.includes(newDir) ? newDir : dir;
+    }
+
+    filterExtraKeys(newDir, dir) {
+        let filtered = newDir.filter(([key, val]) => val)
+        if (filtered.length === 1) return filtered
+
+        if (filtered[0][0] === C.DIR_RIGHT && filtered[1][0] === C.DIR_LEFT)
+            filtered = filtered[0][0] === dir ? [filtered[1]] : [filtered[0]]
+        if (filtered[0][0] === C.DIR_DOWN && filtered[1][0] === C.DIR_UP)
+            filtered = filtered[0][0] === dir ? [filtered[1]] : [filtered[0]]
+
+        return filtered
     }
 
     getNewPosUsingDir(type, moveData) {
