@@ -36,7 +36,7 @@ class GameRenderer {
         gameCanvas.drawHealth();
         gameCanvas.drawEnemies();
 
-        gameCanvas.heroSprite.draw()
+        // gameCanvas.heroSprite.draw()
 
         if (!gameOver(gameCanvas)) requestAnimationFrame(this.step)
     }
