@@ -47,17 +47,18 @@ class GameRenderer {
         if (dirOptions.hasOwnProperty(e.key)) {
             let dir = dirOptions[e.key]
             this.keysDown[dir] = false
-            let remainingKeys = 
-                Object.entries(this.keysDown).filter(([key, val]) => val)
-            if(remainingKeys.length > 0) 
+
+            if(this.getMoveKeysDown().length > 0) 
                 gameCanvas.hero.changeDir(this.keysDown)
         }
 
         if (Object.values(this.keysDown).every(val => val === false))
             gameCanvas.hero.changeVel(0)
 
-        if(e.key === C.HERO_DASH_KEY)
-            gameCanvas.hero.changeVel(1)
+        if(e.key === C.HERO_DASH_KEY){
+            this.getMoveKeysDown().length > 0 
+                ? gameCanvas.hero.changeVel(1) : gameCanvas.hero.changeVel(0)
+        }
         
     }
 
@@ -72,8 +73,8 @@ class GameRenderer {
         }
 
         if (e.key === C.HERO_DASH_KEY) {
-            gameCanvas.hero.changeVel(3)
-            gameCanvas.hero.changeDir(keysDown)
+            this.getMoveKeysDown().length > 0
+                ? gameCanvas.hero.changeVel(3) : gameCanvas.hero.changeVel(0)
         }
 
         if (e.key === 'q')
@@ -82,6 +83,10 @@ class GameRenderer {
         if (e.key === 'x')
             gameCanvas.hero.useWeapon()
         
+    }
+
+    getMoveKeysDown(){
+        return Object.entries(this.keysDown).filter(([key, val]) => val)
     }
 
     bindKeyHandlers() {
