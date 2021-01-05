@@ -1,6 +1,7 @@
 import * as C from './constants'
 import Hero from './hero'
 import Enemy from './enemy'
+import Sprite from './sprite'
 
 const getRandPos = () => {
     const factor = C.CANVAS_SIDE_LENGTH / C.UNIT
@@ -21,6 +22,7 @@ class GameCanvas {
     constructor({ ctx }) {
         this.ctx = ctx;
         this.hero = new Hero({ pos: C.HERO_START_POS, ctx })
+        this.heroSprite = new Sprite({ctx});
         this.enemies = []
 
         this.clearCanvas = this.clearCanvas.bind(this)
