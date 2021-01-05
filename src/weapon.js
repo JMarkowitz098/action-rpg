@@ -12,6 +12,8 @@ class Weapon extends GameObject {
 
         this.length = C.WEAPON_LENGTH
         this.width = C.WEAPON_WIDTH
+
+        this.putAway = this.putAway.bind(this)
     }
 
     draw(){
@@ -55,6 +57,25 @@ class Weapon extends GameObject {
             this.y < enemyY + enemyWidth &&
             this.y + weaponLength > enemyY)
      
+    }
+
+    getNewDir(dir) {
+        switch (dir) {
+            case C.DIR_UP:
+            case C.DIR_DOWN:
+                return C.WEAPON_DIR_HORIZONTAL
+            case C.DIR_LEFT:
+            case C.DIR_RIGHT:
+                return C.WEAPON_DIR_VERTICAL
+            default:
+                return C.WEAPON_DIR_HORIZONTAL
+        }
+    }
+
+    putAway() {
+        this.color = 'white' // Outside of canvas color
+        this.x = C.CANVAS_RIGHT_BOUNDARY
+        this.y = C.CANVAS_DOWN_BOUNDARY
     }
 }
 

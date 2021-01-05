@@ -18,8 +18,6 @@ class Hero extends GameObject {
         this.health = this.createStartingHealth(C.HERO_START_HEALTH)
         this.weapon = new Weapon({ctx: attributes.ctx})
         this.movement = new Movement()
-
-        this.putAwayWeapon = this.putAwayWeapon.bind(this)
     }
 
     draw() {
@@ -100,7 +98,7 @@ class Hero extends GameObject {
     }
 
     useWeapon(){
-        this.weapon.dir = this.getNewWeaponDir()
+        this.weapon.dir = this.weapon.getNewDir(this.dir)
         const { newX, newY } = this.movement.getNewPosUsingDir(this.weapon.dir,{
             x: this.x,
             y: this.y,
@@ -112,27 +110,8 @@ class Hero extends GameObject {
             this.weapon.color = C.WEAPON_COLOR
             this.weapon.x = newX
             this.weapon.y = newY
-            setTimeout(this.putAwayWeapon, 50)
+            setTimeout(this.weapon.putAway, 50)
         }
-    }
-
-    getNewWeaponDir(){
-        switch (this.dir) {
-            case C.DIR_UP:
-            case C.DIR_DOWN:
-                return C.WEAPON_DIR_HORIZONTAL
-            case C.DIR_LEFT:
-            case C.DIR_RIGHT:
-                return C.WEAPON_DIR_VERTICAL
-            default:
-                return C.WEAPON_DIR_HORIZONTAL
-        }
-    }
-
-    putAwayWeapon(){
-        this.weapon.color = 'white' // Outside of canvas color
-        this.weapon.x = C.CANVAS_RIGHT_BOUNDARY
-        this.weapon.y = C.CANVAS_DOWN_BOUNDARY
     }
 
     move(){
