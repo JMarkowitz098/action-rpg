@@ -81,13 +81,13 @@ class Movement {
                 delta = C.HERO_MOVE_LENGTH * vel
                 break;
             case C.WEAPON_DIR_VERTICAL:
-                oldX = x + (C.HERO_SIZE - C.WEAPON_WIDTH) / 2
-                oldY = y + (C.HERO_SIZE - C.WEAPON_LENGTH) / 2
+                oldX = x + (C.HERO_WIDTH - C.WEAPON_WIDTH) / 2
+                oldY = y + (C.HERO_LENGTH - C.WEAPON_LENGTH) / 2
                 delta = C.WEAPON_DIST
                 break;
             case C.WEAPON_DIR_HORIZONTAL:
-                oldX = x - (C.WEAPON_LENGTH - C.HERO_SIZE) / 2
-                oldY = y - (C.WEAPON_WIDTH - C.HERO_SIZE) / 2
+                oldX = x - (C.WEAPON_LENGTH - C.HERO_WIDTH) / 2
+                oldY = y - (C.WEAPON_WIDTH - C.HERO_LENGTH) / 2
                 delta = C.WEAPON_DIST
                 break;
         }
@@ -106,13 +106,13 @@ class Movement {
     validXMove(dir, newX) {
         return dir === 'left'
             ? newX >= C.CANVAS_LEFT_BOUNDARY
-            : newX <= C.CANVAS_RIGHT_BOUNDARY - C.HERO_SIZE
+            : newX <= C.CANVAS_RIGHT_BOUNDARY - C.HERO_WIDTH
     }
 
     validYMove(dir, newY) {
         return dir === 'up'
             ? newY >= C.CANVAS_UP_BOUNDARY
-            : newY <= C.CANVAS_DOWN_BOUNDARY - C.HERO_SIZE
+            : newY <= C.CANVAS_DOWN_BOUNDARY - C.HERO_LENGTH
     }
 }
 

@@ -14,7 +14,6 @@ class Hero extends GameObject {
         }
         super(attributes)
 
-        this.length = C.HERO_SIZE
         this.health = this.createStartingHealth(C.HERO_START_HEALTH)
         this.weapon = new Weapon({ctx: attributes.ctx})
         this.movement = new Movement()
@@ -23,14 +22,19 @@ class Hero extends GameObject {
     }
 
     draw() {
-        const { x, y, spriteDirection, hasMoved, spritePositions} = this
+        const { x, y, spriteDirection, hasMoved, spritePositions, ctx} = this
 
-        if(hasMoved) this.changeFrameAttributes()
-        this.drawFrame(
-            spritePositions[this.spritePositionsIdx], 
-            spriteDirection, 
-            x, y
-        );
+        if(this.color === C.HERO_COLOR){
+            if(hasMoved) this.changeFrameAttributes()
+            this.drawFrame(
+                spritePositions[this.spritePositionsIdx], 
+                spriteDirection, 
+                x, y
+            );
+        } else {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(x, y, C.HERO_WIDTH, C.HERO_LENGTH);
+        }
     }
 
     changeFrameAttributes(){
@@ -64,11 +68,13 @@ class Hero extends GameObject {
 
     initSprite(){
         let image = new Image
-        image.src = '/Users/jared/Desktop/Coding/action_rpg/Green-Cap-Character-16x18.png'
+        // image.src = '/Users/jared/Desktop/Coding/action_rpg/Green-Cap-Character-16x18.png'
+        image.src = '/Users/jared/Desktop/Coding/action_rpg/Patreon sprites 1/14.png'
         this.image = image
         this.spriteDirection = C.HERO_SPRITE_FACING_DOWN
         this.frameCount = 0;
-        this.spritePositions = [0, 1, 0, 2];
+        // this.spritePositions = [0, 1, 0, 2];
+        this.spritePositions = [0, 1, 2, 3];
         this.spritePositionsIdx = 0;
         this.hasMoved = false;
     }
@@ -113,13 +119,14 @@ class Hero extends GameObject {
         const enemyX = enemyPos.x - C.ENEMY_SIZE
         const enemyY = enemyPos.y - C.ENEMY_SIZE
         const enemyWidth = C.ENEMY_SIZE * 2
-        const heroWidth = C.HERO_SIZE
+        const heroWidth = C.HERO_WIDTH
+        const heroLength = C.HERO_LENGTH
 
         // Detect if 2 rectangles have collided
         return (this.x < enemyX + enemyWidth &&
             this.x + heroWidth > enemyX &&
             this.y < enemyY + enemyWidth &&
-            this.y + heroWidth > enemyY) 
+            this.y + heroLength > enemyY) 
     }
 
     useWeapon(){
@@ -150,6 +157,12 @@ class Hero extends GameObject {
                 return C.HERO_SPRITE_FACING_LEFT
             case C.DIR_RIGHT:
                 return C.HERO_SPRITE_FACING_RIGHT
+            case C.DIR_LEFT_UP:
+            case C.DIR_RIGHT_UP:
+                return C.HERO_SPRITE_FACING_UP
+            case C.DIR_DOWN_LEFT:
+            case C.DIR_DOWN_RIGHT:
+                return C.HERO_SPRITE_FACING_DOWN
             default: //Catches diagonal for now
                 return C.HERO_SPRITE_FACING_DOWN
         }

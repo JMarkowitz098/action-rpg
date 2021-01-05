@@ -36,8 +36,6 @@ class GameRenderer {
         gameCanvas.drawHealth();
         gameCanvas.drawEnemies();
 
-        // gameCanvas.heroSprite.draw()
-
         if (!gameOver(gameCanvas)) requestAnimationFrame(this.step)
     }
 
@@ -69,7 +67,6 @@ class GameRenderer {
             keysDown[dirOptions[e.key]] = true;
             gameCanvas.hero.changeVel(1)
             gameCanvas.hero.changeDir(keysDown)
-            gameCanvas.heroSprite.move(keysDown);
         }
 
         if (e.key === C.HERO_DASH_KEY) {
