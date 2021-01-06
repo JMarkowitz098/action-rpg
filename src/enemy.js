@@ -18,7 +18,6 @@ class Enemy extends GameObject {
             ...attributes, 
             vel: C.ENEMY_START_VEL, 
             dir: getRandomDir(),
-            color: C.ENEMY_COLOR
         }
         super(attributes)
 
@@ -46,10 +45,10 @@ class Enemy extends GameObject {
         const { ctx, image } = this;
         ctx.drawImage(
             image, //image source
-            frameX * C.ENEMY_SPRITE_WIDTH, //sx
-            frameY * C.ENEMY_SPRITE_HEIGHT, //sy
-            C.ENEMY_SPRITE_WIDTH, //sWIDTH
-            C.ENEMY_SPRITE_HEIGHT, //sHEIGHT
+            frameX * C.ENEMY_SPRITE_PANEL_WIDTH, //sx
+            frameY * C.ENEMY_SPRITE_PANEL_HEIGHT, //sy
+            C.ENEMY_SPRITE_PANEL_WIDTH, //sWIDTH
+            C.ENEMY_SPRITE_PANEL_HEIGHT, //sHEIGHT
             canvasX, //dX
             canvasY, //dY
             C.ENEMY_SPRITE_SCALED_WIDTH, //dWIDTH

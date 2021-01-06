@@ -33,7 +33,6 @@ class GameCanvas {
         let pos = getRandPos()
         while (hero.collidedWith({x: pos.x, y:pos.y})) pos = getRandPos()
         let enemy = new Enemy({
-            color: C.ENEMY_COLOR,
             pos,
             ctx
         })
@@ -93,6 +92,15 @@ class GameCanvas {
             C.CANVAS_SIDE_LENGTH,
             C.CANVAS_SIDE_LENGTH
         );
+
+        ctx.fillStyle = 'grey';
+        ctx.fillRect(
+            0,
+            0,
+            C.CANVAS_SIDE_LENGTH + 150,
+            C.CANVAS_SIDE_LENGTH + 150
+        );
+
         ctx.fillStyle = C.CANVAS_COLOR;
         ctx.fillRect(
             C.CANVAS_START_POS,

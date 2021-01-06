@@ -42,14 +42,13 @@ export const DIR_OPTIONS = {
 export const ENEMY_SIZE = UNIT * 3
 export const ENEMY_LENGTH = 48
 export const ENEMY_WIDTH = 30
-export const ENEMY_COLOR = 'red'
 export const ENEMY_MOVE_LENGTH = 2
 export const ENEMY_SPAWN_RATE = 1000
 export const ENEMY_START_VEL = 1
 
 export const ENEMY_SPRITE_SCALE = 1.5
-export const ENEMY_SPRITE_WIDTH = 48
-export const ENEMY_SPRITE_HEIGHT = 62
+export const ENEMY_SPRITE_PANEL_WIDTH = 48
+export const ENEMY_SPRITE_PANEL_HEIGHT = 62
 export const ENEMY_SPRITE_SCALED_WIDTH = ENEMY_WIDTH * ENEMY_SPRITE_SCALE
 export const ENEMY_SPRITE_SCALED_HEIGHT = ENEMY_LENGTH * ENEMY_SPRITE_SCALE
 export const ENEMY_SPRITE_FACING_DOWN = 0;
@@ -78,8 +77,8 @@ export const HERO_DASH_SPEED = 8
 export const HERO_DASH_TIME = 50
 
 export const HERO_SPRITE_SCALE = 1.5
-export const HERO_SPRITE_WIDTH = 48
-export const HERO_SPRITE_HEIGHT = 62
+export const HERO_SPRITE_PANEL_WIDTH = 48
+export const HERO_SPRITE_PANEL_HEIGHT = 62
 export const HERO_SPRITE_SCALED_WIDTH = HERO_WIDTH * HERO_SPRITE_SCALE
 export const HERO_SPRITE_SCALED_HEIGHT = HERO_LENGTH * HERO_SPRITE_SCALE
 export const HERO_SPRITE_FACING_DOWN = 0;

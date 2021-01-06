@@ -2,7 +2,6 @@ import * as C from './constants'
 import Weapon from './weapon'
 import GameObject from './game_object'
 import Health from './health'
-// import Movement from './movement'
 import HeroMovement from './hero_movement'
 
 class Hero extends GameObject {
@@ -17,7 +16,6 @@ class Hero extends GameObject {
 
         this.health = this.createStartingHealth(C.HERO_START_HEALTH)
         this.weapon = new Weapon({ctx: attributes.ctx})
-        // this.movement = new Movement()
         this.movement = new HeroMovement()
 
         this.initSprite()
@@ -58,10 +56,10 @@ class Hero extends GameObject {
         const { ctx, image } = this;
         ctx.drawImage(
             image, //image source
-            frameX * C.HERO_SPRITE_WIDTH, //sx
-            frameY * C.HERO_SPRITE_HEIGHT, //sy
-            C.HERO_SPRITE_WIDTH, //sWIDTH
-            C.HERO_SPRITE_HEIGHT, //sHEIGHT
+            frameX * C.HERO_SPRITE_PANEL_WIDTH, //sx
+            frameY * C.HERO_SPRITE_PANEL_HEIGHT, //sy
+            C.HERO_SPRITE_PANEL_WIDTH, //sWIDTH
+            C.HERO_SPRITE_PANEL_HEIGHT, //sHEIGHT
             canvasX, //dX
             canvasY, //dY
             C.HERO_SPRITE_SCALED_WIDTH, //dWIDTH
@@ -172,8 +170,8 @@ class Hero extends GameObject {
         ctx.strokeRect(
             x,
             y,
-            C.ENEMY_SPRITE_SCALED_WIDTH,
-            C.ENEMY_SPRITE_SCALED_HEIGHT
+            C.HERO_SPRITE_SCALED_WIDTH,
+            C.HERO_SPRITE_SCALED_HEIGHT
         );
     }
 
