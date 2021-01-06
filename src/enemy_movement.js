@@ -1,73 +1,21 @@
 import * as C from './constants'
-import EnemyMovement from './enemy_movement'
-import GameObject from './game_object'
+import Movement from './movement'
 
-const getRandomDir = (oldDir = '') => {
-        let randIdx = Math.floor(Math.random() * C.DIR_POSSIBLE_MOVES.length)
-        let newDir = C.DIR_POSSIBLE_MOVES[randIdx]
-        while(oldDir === newDir){
-            randIdx = Math.floor(Math.random() * C.DIR_POSSIBLE_MOVES.length)
-            newDir = C.DIR_POSSIBLE_MOVES[randIdx]
-        }
-        return newDir
-}
-
-class Enemy extends GameObject {
-    constructor(attributes) {
-        attributes = { 
-            ...attributes, 
-            vel: C.ENEMY_START_VEL, 
-            dir: getRandomDir(),
-            color: C.ENEMY_COLOR
-        }
-        super(attributes)
-
-        this.length = C.ENEMY_SIZE
-        this.changeDir = this.changeDir.bind(this)
-        this.movement = new EnemyMovement()
-    }
-
-    draw() {
-        const { length, color, x, y, ctx } = this
-        ctx.fillStyle = color;
-
-        ctx.beginPath();
-        ctx.arc(x, y, length, 0, 2 * Math.PI);
-        ctx.fill();
-
-        // this.drawHitBox()
-    }
-
-    drawHitBox(){
-        const { x, y, ctx } = this;
-        ctx.strokeStyle = "green";
-        ctx.rect(
-            x - C.ENEMY_SIZE,
-            y - C.ENEMY_SIZE,
-            C.ENEMY_SIZE * 2,
-            C.ENEMY_SIZE * 2
-        );
-        ctx.stroke();
-    }
+class EnemyMovement extends Movement {
 
     changeDir() {
-        this.dir = getRandomDir()
+        this.dir = this.getRandomDir()
     }
 
-    changeVel(vel) {
-        this.vel = vel
-    }
+    move(moveData) {
+        const { x, y, dir, vel } = moveData;
+        if (this.validMove(dir, x, y)) 
+            return { x, y }
 
-    die() {
-        this.color = C.CANVAS_OUTSIDE_COLOR
-        this.x = null;
-        this.y = null;
-    }
-
-    move() {
-        const { x, y, dir, vel } = this;
         let newX = x
-        let newY = y;
+        let newY = y
+        let newPos
+
         switch (dir) {
             case C.DIR_UP:
                 newY = y - C.ENEMY_MOVE_LENGTH * vel
@@ -100,24 +48,13 @@ class Enemy extends GameObject {
         }
 
         if (this.validMove(dir, newX, newY)) {
-            this.x = newX
-            this.y = newY
+            return {x: newX, y: newY}
         } else {
-            this.dir = this.getRandomDir(dir)
-            this.move()
+            let newDir = this.getRandomDir(dir)
+            newPos = this.move({x, y, vel, dir: newDir})
         }
 
-        // Eventually move into enemy movement class
-        // let newPos = this.movement.move({
-        //     x: this.x,
-        //     y: this.y,
-        //     dir: this.dir,
-        //     vel: this.vel
-        // })
-
-        // this.x = newPos.x
-        // this.y = newPos.y
-        
+        return newPos
     }
 
     validXMove(dir, newX) {
@@ -151,4 +88,4 @@ class Enemy extends GameObject {
     }
 }
 
-export default Enemy
+export default EnemyMovement

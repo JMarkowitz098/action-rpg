@@ -2,7 +2,8 @@ import * as C from './constants'
 import Weapon from './weapon'
 import GameObject from './game_object'
 import Health from './health'
-import Movement from './movement'
+// import Movement from './movement'
+import HeroMovement from './hero_movement'
 
 class Hero extends GameObject {
     constructor(attributes){
@@ -16,7 +17,8 @@ class Hero extends GameObject {
 
         this.health = this.createStartingHealth(C.HERO_START_HEALTH)
         this.weapon = new Weapon({ctx: attributes.ctx})
-        this.movement = new Movement()
+        // this.movement = new Movement()
+        this.movement = new HeroMovement()
 
         this.initSprite()
     }
