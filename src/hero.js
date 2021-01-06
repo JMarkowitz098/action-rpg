@@ -27,6 +27,7 @@ class Hero extends GameObject {
         const { x, y, spriteDirection, hasMoved, spritePositions, ctx} = this
 
         if(this.color === C.HERO_COLOR){
+            this.drawHitBox()
             if(hasMoved) this.changeFrameAttributes()
             this.drawFrame(
                 spritePositions[this.spritePositionsIdx], 
@@ -35,7 +36,7 @@ class Hero extends GameObject {
             );
         } else {
             ctx.fillStyle = this.color;
-            ctx.fillRect(x, y, C.HERO_WIDTH, C.HERO_LENGTH);
+            ctx.fillRect(x, y, C.HERO_SPRITE_SCALED_WIDTH, C.HERO_SPRITE_SCALED_HEIGHT);
         }
     }
 
@@ -70,12 +71,10 @@ class Hero extends GameObject {
 
     initSprite(){
         let image = new Image
-        // image.src = '/Users/jared/Desktop/Coding/action_rpg/Green-Cap-Character-16x18.png'
         image.src = '/Users/jared/Desktop/Coding/action_rpg/Patreon sprites 1/14.png'
         this.image = image
         this.spriteDirection = C.HERO_SPRITE_FACING_DOWN
         this.frameCount = 0;
-        // this.spritePositions = [0, 1, 0, 2];
         this.spritePositions = [0, 1, 2, 3];
         this.spritePositionsIdx = 0;
         this.hasMoved = false;
@@ -118,16 +117,17 @@ class Hero extends GameObject {
     }
 
     collidedWith(enemy){
-        const enemyX = enemy.x - C.ENEMY_SIZE
-        const enemyY = enemy.y - C.ENEMY_SIZE
-        const enemyWidth = C.ENEMY_SIZE * 2
-        const heroWidth = C.HERO_WIDTH
-        const heroLength = C.HERO_LENGTH
+        const enemyX = enemy.x
+        const enemyY = enemy.y
+        const enemyLength = C.ENEMY_SPRITE_SCALED_HEIGHT
+        const enemyWidth = C.ENEMY_SPRITE_SCALED_WIDTH
+        const heroWidth = C.HERO_SPRITE_SCALED_WIDTH
+        const heroLength = C.HERO_SPRITE_SCALED_HEIGHT
 
         // Detect if 2 rectangles have collided
         return (this.x < enemyX + enemyWidth &&
             this.x + heroWidth > enemyX &&
-            this.y < enemyY + enemyWidth &&
+            this.y < enemyY + enemyLength &&
             this.y + heroLength > enemyY) 
     }
 
@@ -164,6 +164,17 @@ class Hero extends GameObject {
             case C.DIR_DOWN_RIGHT:
                 return C.HERO_SPRITE_FACING_DOWN
         }
+    }
+
+    drawHitBox() {
+        const { x, y, ctx } = this;
+        ctx.strokeStyle = "green";
+        ctx.strokeRect(
+            x,
+            y,
+            C.ENEMY_SPRITE_SCALED_WIDTH,
+            C.ENEMY_SPRITE_SCALED_HEIGHT
+        );
     }
 
     move(){

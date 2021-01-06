@@ -8,8 +8,8 @@ const getRandPos = () => {
     let y = Math.floor(Math.random() * factor) * C.UNIT
     while (x > C.CANVAS_SIDE_LENGTH 
         || y > C.CANVAS_SIDE_LENGTH
-        || x < C.CANVAS_START_POS + C.ENEMY_SIZE
-        || y < C.CANVAS_START_POS + C.ENEMY_SIZE
+        || x < C.CANVAS_START_POS + C.ENEMY_SPRITE_SCALED_WIDTH
+        || y < C.CANVAS_START_POS + C.ENEMY_SPRITE_SCALED_HEIGHT
     ){
         x = Math.floor(Math.random() * factor) * C.UNIT
         y = Math.floor(Math.random() * factor) * C.UNIT
@@ -33,7 +33,6 @@ class GameCanvas {
         let pos = getRandPos()
         while (hero.collidedWith({x: pos.x, y:pos.y})) pos = getRandPos()
         let enemy = new Enemy({
-            size: C.ENEMY_SIZE,
             color: C.ENEMY_COLOR,
             pos,
             ctx

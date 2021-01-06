@@ -43,9 +43,10 @@ class Weapon extends GameObject {
     }
 
     collidedWith(enemyPos) {
-        const enemyX = enemyPos.x - C.ENEMY_SIZE
-        const enemyY = enemyPos.y - C.ENEMY_SIZE
-        const enemyWidth = C.ENEMY_SIZE * 2
+        const enemyX = enemyPos.x
+        const enemyY = enemyPos.y
+        const enemyWidth = C.ENEMY_SPRITE_SCALED_WIDTH
+        const enemyLength = C.ENEMY_SPRITE_SCALED_HEIGHT
         const weaponWidth = this.dir === C.WEAPON_DIR_VERTICAL 
             ? C.WEAPON_WIDTH : C.WEAPON_LENGTH
         const weaponLength = this.dir === C.WEAPON_DIR_VERTICAL
@@ -54,7 +55,7 @@ class Weapon extends GameObject {
         // Detect if 2 rectangles have collided
         return (this.x < enemyX + enemyWidth &&
             this.x + weaponWidth > enemyX &&
-            this.y < enemyY + enemyWidth &&
+            this.y < enemyY + enemyLength &&
             this.y + weaponLength > enemyY)
      
     }

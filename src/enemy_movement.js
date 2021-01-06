@@ -60,13 +60,13 @@ class EnemyMovement extends Movement {
     validXMove(dir, newX) {
         return dir === 'left'
             ? newX >= C.CANVAS_LEFT_BOUNDARY + 25
-            : newX <= C.CANVAS_RIGHT_BOUNDARY - C.ENEMY_SIZE
+            : newX <= C.CANVAS_RIGHT_BOUNDARY - C.ENEMY_WIDTH
     }
 
     validYMove(dir, newY) {
         return dir === 'up'
             ? newY >= C.CANVAS_UP_BOUNDARY + 25
-            : newY <= C.CANVAS_DOWN_BOUNDARY - C.ENEMY_SIZE
+            : newY <= C.CANVAS_DOWN_BOUNDARY - C.ENEMY_LENGTH
     }
 
     validMove(dir, newX, newY) {

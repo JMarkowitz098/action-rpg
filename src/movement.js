@@ -12,13 +12,13 @@ class Movement {
     validXMove(dir, newX) {
         return dir === 'left'
             ? newX >= C.CANVAS_LEFT_BOUNDARY
-            : newX <= C.CANVAS_RIGHT_BOUNDARY - C.HERO_WIDTH
+            : newX <= C.CANVAS_RIGHT_BOUNDARY - C.HERO_SPRITE_SCALED_WIDTH
     }
 
     validYMove(dir, newY) {
         return dir === 'up'
             ? newY >= C.CANVAS_UP_BOUNDARY
-            : newY <= C.CANVAS_DOWN_BOUNDARY - C.HERO_LENGTH
+            : newY <= C.CANVAS_DOWN_BOUNDARY - C.HERO_SPRITE_SCALED_HEIGHT
     }
 }
 
