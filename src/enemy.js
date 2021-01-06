@@ -1,5 +1,6 @@
 import * as C from './constants'
 import EnemyMovement from './enemy_movement'
+// import Movement from './movement'
 import GameObject from './game_object'
 
 const getRandomDir = (oldDir = '') => {
@@ -22,7 +23,10 @@ class Enemy extends GameObject {
 
         this.length = C.ENEMY_SIZE
         this.changeDir = this.changeDir.bind(this)
-        this.movement = new EnemyMovement()
+        this.movement = new EnemyMovement({
+            width: C.ENEMY_SPRITE_SCALED_WIDTH,
+            length: C.ENEMY_SPRITE_SCALED_LENGTH
+        })
 
         this.initSprite()
     }
@@ -30,7 +34,7 @@ class Enemy extends GameObject {
     draw() {
         const { x, y, spriteDirection, spritePositions } = this
 
-        if(this.isInCanvas()){
+        if(this.movement.isInCanvas({x, y})){
             this.drawHitBox()
             this.changeFrameAttributes()
             this.drawFrame(
@@ -146,24 +150,24 @@ class Enemy extends GameObject {
                 newX = x + C.ENEMY_MOVE_LENGTH * vel
                 break;
             case C.DIR_LEFT_UP:
-                newX = x - C.ENEMY_MOVE_LENGTH * vel
-                newY = y - C.ENEMY_MOVE_LENGTH * vel
+                newX = x - C.ENEMY_MOVE_LENGTH * vel * .6
+                newY = y - C.ENEMY_MOVE_LENGTH * vel * .6
                 break;
             case C.DIR_RIGHT_UP:
-                newX = x + C.ENEMY_MOVE_LENGTH * vel
-                newY = y - C.ENEMY_MOVE_LENGTH * vel
+                newX = x + C.ENEMY_MOVE_LENGTH * vel * .6
+                newY = y - C.ENEMY_MOVE_LENGTH * vel * .6
                 break;
             case C.DIR_DOWN_LEFT:
-                newX = x - C.ENEMY_MOVE_LENGTH * vel
-                newY = y + C.ENEMY_MOVE_LENGTH * vel
+                newX = x - C.ENEMY_MOVE_LENGTH * vel * .6
+                newY = y + C.ENEMY_MOVE_LENGTH * vel * .6
                 break;
             case C.DIR_DOWN_RIGHT:
-                newX = x + C.ENEMY_MOVE_LENGTH * vel
-                newY = y + C.ENEMY_MOVE_LENGTH * vel
+                newX = x + C.ENEMY_MOVE_LENGTH * vel * .6
+                newY = y + C.ENEMY_MOVE_LENGTH * vel * .6
                 break;
         }
 
-        if (this.validMove(dir, newX, newY)) {
+        if (this.movement.validMove(dir, newX, newY)) {
             this.x = newX
             this.y = newY
             this.spriteDirection = this.getSpriteDir()
@@ -183,36 +187,6 @@ class Enemy extends GameObject {
         // this.x = newPos.x
         // this.y = newPos.y
         
-    }
-
-    validXMove(dir, newX) {
-        return dir === 'left'
-            ? newX >= C.PLAY_AREA_LEFT_BOUNDARY + 25
-            : newX <= C.PLAY_AREA_RIGHT_BOUNDARY - C.ENEMY_SPRITE_SCALED_WIDTH
-    }
-
-    validYMove(dir, newY) {
-        return dir === 'up'
-            ? newY >= C.PLAY_AREA_UP_BOUNDARY + 25
-            : newY <= C.PLAY_AREA_DOWN_BOUNDARY - C.ENEMY_SPRITE_SCALED_LENGTH
-    }
-
-    validMove(dir, newX, newY) {
-        return dir.split(" ").every(dir => {
-            return (dir === 'up' || dir === 'down')
-                ? this.validYMove(dir, newY)
-                : this.validXMove(dir, newX)
-        })
-    }
-
-    isInCanvas(){
-        const { x, y } = this;
-        return(
-            x > C.PLAY_AREA_LEFT_BOUNDARY
-                && x < C.PLAY_AREA_RIGHT_BOUNDARY - C.ENEMY_SPRITE_SCALED_WIDTH
-                && y > C.PLAY_AREA_UP_BOUNDARY
-                && y < C.PLAY_AREA_DOWN_BOUNDARY - C.ENEMY_SPRITE_SCALED_LENGTH
-        )
     }
 
     getRandomDir(oldDir = '') {

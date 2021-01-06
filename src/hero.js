@@ -16,7 +16,10 @@ class Hero extends GameObject {
 
         this.health = this.createStartingHealth(C.HERO_START_HEALTH)
         this.weapon = new Weapon({ctx: attributes.ctx})
-        this.movement = new HeroMovement()
+        this.movement = new HeroMovement({
+            width: C.HERO_SPRITE_SCALED_WIDTH,
+            length: C.HERO_SPRITE_SCALED_LENGTH
+        })
 
         this.initSprite()
     }

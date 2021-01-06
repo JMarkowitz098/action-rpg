@@ -57,26 +57,6 @@ class EnemyMovement extends Movement {
         return newPos
     }
 
-    validXMove(dir, newX) {
-        return dir === 'left'
-            ? newX >= C.PLAY_AREA_LEFT_BOUNDARY + 25
-            : newX <= C.PLAY_AREA_RIGHT_BOUNDARY - C.ENEMY_WIDTH
-    }
-
-    validYMove(dir, newY) {
-        return dir === 'up'
-            ? newY >= C.PLAY_AREA_UP_BOUNDARY + 25
-            : newY <= C.PLAY_AREA_DOWN_BOUNDARY - C.ENEMY_LENGTH
-    }
-
-    validMove(dir, newX, newY) {
-        return dir.split(" ").every(dir => {
-            return (dir === 'up' || dir === 'down')
-                ? this.validYMove(dir, newY)
-                : this.validXMove(dir, newX)
-        })
-    }
-
     getRandomDir(oldDir = '') {
         let randIdx = Math.floor(Math.random() * C.DIR_POSSIBLE_MOVES.length)
         let newDir = C.DIR_POSSIBLE_MOVES[randIdx]

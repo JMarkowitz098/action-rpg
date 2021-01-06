@@ -2,11 +2,14 @@ import * as C from './constants'
 import Movement from './movement'
 
 class HeroMovement extends Movement {
+    constructor(attributes){
+        super(attributes)
+    }
     move(moveData) {
         const { x, y, dir } = moveData;
         const { newX, newY } = this.getNewPosUsingDir(C.HERO_MOVEMENT, moveData)
 
-        return this.isInCanvas(dir, newX, newY)
+        return this.validMove(dir, newX, newY)
             ? { x: newX, y: newY, moved: (x !== newX || y !== newY) }
             : { x, y, moved: false }
     }
