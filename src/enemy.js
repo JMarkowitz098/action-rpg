@@ -122,7 +122,7 @@ class Enemy extends GameObject {
     }
 
     die() {
-        this.color = C.CANVAS_OUTSIDE_COLOR
+        this.color = C.PLAY_AREA_OUTSIDE_COLOR
         this.x = null;
         this.y = null;
     }
@@ -186,14 +186,14 @@ class Enemy extends GameObject {
 
     validXMove(dir, newX) {
         return dir === 'left'
-            ? newX >= C.CANVAS_LEFT_BOUNDARY + 25
-            : newX <= C.CANVAS_RIGHT_BOUNDARY - C.ENEMY_SPRITE_SCALED_WIDTH
+            ? newX >= C.PLAY_AREA_LEFT_BOUNDARY + 25
+            : newX <= C.PLAY_AREA_RIGHT_BOUNDARY - C.ENEMY_SPRITE_SCALED_WIDTH
     }
 
     validYMove(dir, newY) {
         return dir === 'up'
-            ? newY >= C.CANVAS_UP_BOUNDARY + 25
-            : newY <= C.CANVAS_DOWN_BOUNDARY - C.ENEMY_SPRITE_SCALED_HEIGHT
+            ? newY >= C.PLAY_AREA_UP_BOUNDARY + 25
+            : newY <= C.PLAY_AREA_DOWN_BOUNDARY - C.ENEMY_SPRITE_SCALED_HEIGHT
     }
 
     validMove(dir, newX, newY) {

@@ -1,13 +1,16 @@
 export const UNIT = 5;
 
-export const CANVAS_SIDE_LENGTH = 500;
-export const CANVAS_START_POS = 50;
-export const CANVAS_COLOR = 'black';
-export const CANVAS_UP_BOUNDARY = 0 + CANVAS_START_POS;
-export const CANVAS_DOWN_BOUNDARY = 0 + CANVAS_START_POS + CANVAS_SIDE_LENGTH;
-export const CANVAS_LEFT_BOUNDARY = 0 + CANVAS_START_POS;
-export const CANVAS_RIGHT_BOUNDARY = 0 + CANVAS_START_POS + CANVAS_SIDE_LENGTH;
-export const CANVAS_OUTSIDE_COLOR = 'white'
+export const CANVAS_WIDTH = 600
+export const CANVAS_LENGTH = 600
+
+export const PLAY_AREA_SIDE_LENGTH = 500;
+export const PLAY_AREA_START_POS = 50;
+export const PLAY_AREA_COLOR = 'black';
+export const PLAY_AREA_UP_BOUNDARY = 0 + PLAY_AREA_START_POS;
+export const PLAY_AREA_DOWN_BOUNDARY = 0 + PLAY_AREA_START_POS + PLAY_AREA_SIDE_LENGTH;
+export const PLAY_AREA_LEFT_BOUNDARY = 0 + PLAY_AREA_START_POS;
+export const PLAY_AREA_RIGHT_BOUNDARY = 0 + PLAY_AREA_START_POS + PLAY_AREA_SIDE_LENGTH;
+export const PLAY_AREA_OUTSIDE_COLOR = 'white'
 
 export const DIR_DOWN = 'down'
 export const DIR_LEFT = 'left'
@@ -60,8 +63,8 @@ export const FRAME_LIMIT = 15
 
 export const HEALTH_COLOR = 'pink'
 export const HEALTH_LENGTH = UNIT * 4
-export const HEALTH_START_X = CANVAS_LEFT_BOUNDARY + 10
-export const HEALTH_START_Y = CANVAS_UP_BOUNDARY + 10
+export const HEALTH_START_X = PLAY_AREA_LEFT_BOUNDARY + 10
+export const HEALTH_START_Y = PLAY_AREA_UP_BOUNDARY + 10
 
 export const HERO_COLOR = 'blue';
 export const HERO_DASH_KEY = 'z';
@@ -69,7 +72,7 @@ export const HERO_DASH_VEL = 3;
 export const HERO_LENGTH = 48;
 export const HERO_WIDTH = 30;
 export const HERO_MOVE_LENGTH = 4;
-export const HERO_START_POS = { x: CANVAS_START_POS, y: CANVAS_START_POS}
+export const HERO_START_POS = { x: PLAY_AREA_START_POS, y: PLAY_AREA_START_POS}
 export const HERO_START_DIR = DIR_DOWN
 export const HERO_START_HEALTH = 3
 export const HERO_MOVEMENT = 'hero_movement'
@@ -85,6 +88,8 @@ export const HERO_SPRITE_FACING_DOWN = 0;
 export const HERO_SPRITE_FACING_RIGHT = 2;
 export const HERO_SPRITE_FACING_UP = 3;
 export const HERO_SPRITE_FACING_LEFT = 1;
+
+
 
 export const WEAPON_COLOR = 'green'
 export const WEAPON_LENGTH = UNIT * 20

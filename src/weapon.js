@@ -5,7 +5,7 @@ class Weapon extends GameObject {
     constructor(attributes){
         attributes = {
             ...attributes,
-            color: C.CANVAS_COLOR,
+            color: C.PLAY_AREA_COLOR,
             pos: {}
         }
         super(attributes)
@@ -75,8 +75,10 @@ class Weapon extends GameObject {
 
     putAway() {
         this.color = 'white' // Outside of canvas color
-        this.x = C.CANVAS_RIGHT_BOUNDARY
-        this.y = C.CANVAS_DOWN_BOUNDARY
+        // this.x = C.PLAY_AREA_RIGHT_BOUNDARY
+        // this.y = C.PLAY_AREA_DOWN_BOUNDARY
+        this.x = C.PLAY_AREA_RIGHT_BOUNDARY + 50
+        this.y = C.PLAY_AREA_DOWN_BOUNDARY + 50
     }
 }
 

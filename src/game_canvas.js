@@ -3,13 +3,13 @@ import Hero from './hero'
 import Enemy from './enemy'
 
 const getRandPos = () => {
-    const factor = C.CANVAS_SIDE_LENGTH / C.UNIT
+    const factor = C.PLAY_AREA_SIDE_LENGTH / C.UNIT
     let x = Math.floor(Math.random() * factor) * C.UNIT
     let y = Math.floor(Math.random() * factor) * C.UNIT
-    while (x > C.CANVAS_SIDE_LENGTH 
-        || y > C.CANVAS_SIDE_LENGTH
-        || x < C.CANVAS_START_POS + C.ENEMY_SPRITE_SCALED_WIDTH
-        || y < C.CANVAS_START_POS + C.ENEMY_SPRITE_SCALED_HEIGHT
+    while (x > C.PLAY_AREA_SIDE_LENGTH 
+        || y > C.PLAY_AREA_SIDE_LENGTH
+        || x < C.PLAY_AREA_START_POS + C.ENEMY_SPRITE_SCALED_WIDTH
+        || y < C.PLAY_AREA_START_POS + C.ENEMY_SPRITE_SCALED_HEIGHT
     ){
         x = Math.floor(Math.random() * factor) * C.UNIT
         y = Math.floor(Math.random() * factor) * C.UNIT
@@ -87,26 +87,26 @@ class GameCanvas {
     clearCanvas() {
         const { ctx } = this;
         ctx.clearRect(
-            C.CANVAS_SIDE_LENGTH,
-            C.CANVAS_SIDE_LENGTH,
-            C.CANVAS_SIDE_LENGTH,
-            C.CANVAS_SIDE_LENGTH
+            C.PLAY_AREA_SIDE_LENGTH,
+            C.PLAY_AREA_SIDE_LENGTH,
+            C.PLAY_AREA_SIDE_LENGTH,
+            C.PLAY_AREA_SIDE_LENGTH
         );
 
         ctx.fillStyle = 'grey';
         ctx.fillRect(
             0,
             0,
-            C.CANVAS_SIDE_LENGTH + 150,
-            C.CANVAS_SIDE_LENGTH + 150
+            C.PLAY_AREA_SIDE_LENGTH + 150,
+            C.PLAY_AREA_SIDE_LENGTH + 150
         );
 
-        ctx.fillStyle = C.CANVAS_COLOR;
+        ctx.fillStyle = C.PLAY_AREA_COLOR;
         ctx.fillRect(
-            C.CANVAS_START_POS,
-            C.CANVAS_START_POS,
-            C.CANVAS_SIDE_LENGTH,
-            C.CANVAS_SIDE_LENGTH
+            C.PLAY_AREA_START_POS,
+            C.PLAY_AREA_START_POS,
+            C.PLAY_AREA_SIDE_LENGTH,
+            C.PLAY_AREA_SIDE_LENGTH
         );
     }
 }
