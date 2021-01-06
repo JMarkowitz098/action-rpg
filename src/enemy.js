@@ -17,7 +17,6 @@ class Enemy extends GameObject {
         attributes = { 
             ...attributes, 
             vel: C.ENEMY_START_VEL, 
-            dir: getRandomDir(),
         }
         super(attributes)
 
@@ -31,13 +30,15 @@ class Enemy extends GameObject {
     draw() {
         const { x, y, spriteDirection, spritePositions } = this
 
-        this.drawHitBox()
-        this.changeFrameAttributes()
-        this.drawFrame(
-            spritePositions[this.spritePositionsIdx],
-            spriteDirection,
-            x, y
-        );
+        if(this.isInCanvas()){
+            this.drawHitBox()
+            this.changeFrameAttributes()
+            this.drawFrame(
+                spritePositions[this.spritePositionsIdx],
+                spriteDirection,
+                x, y
+            );
+        }
        
     }
 
@@ -202,6 +203,16 @@ class Enemy extends GameObject {
                 ? this.validYMove(dir, newY)
                 : this.validXMove(dir, newX)
         })
+    }
+
+    isInCanvas(){
+        const { x, y } = this;
+        return(
+            x > C.PLAY_AREA_LEFT_BOUNDARY
+                && x < C.PLAY_AREA_RIGHT_BOUNDARY - C.ENEMY_SPRITE_SCALED_WIDTH
+                && y > C.PLAY_AREA_UP_BOUNDARY
+                && y < C.PLAY_AREA_DOWN_BOUNDARY - C.ENEMY_SPRITE_SCALED_LENGTH
+        )
     }
 
     getRandomDir(oldDir = '') {

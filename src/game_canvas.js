@@ -2,19 +2,49 @@ import * as C from './constants'
 import Hero from './hero'
 import Enemy from './enemy'
 
-const getRandPos = () => {
-    const factor = C.PLAY_AREA_SIDE_LENGTH / C.UNIT
-    let x = Math.floor(Math.random() * factor) * C.UNIT
-    let y = Math.floor(Math.random() * factor) * C.UNIT
-    while (x > C.PLAY_AREA_SIDE_LENGTH 
-        || y > C.PLAY_AREA_SIDE_LENGTH
-        || x < C.PLAY_AREA_START_POS + C.ENEMY_SPRITE_SCALED_WIDTH
-        || y < C.PLAY_AREA_START_POS + C.ENEMY_SPRITE_SCALED_LENGTH
-    ){
-        x = Math.floor(Math.random() * factor) * C.UNIT
-        y = Math.floor(Math.random() * factor) * C.UNIT
+const getRandStartPos = () => {
+    const startingLocations = ['top', 'bottom', 'left', 'right']
+    let startIdx =  getRandom(startingLocations.length)
+    let startingLocation = startingLocations[startIdx]
+    let x, y, dir
+
+    switch (startingLocation) {
+        case 'top':
+            x = getRandX()
+            y = C.PLAY_AREA_UP_BOUNDARY - C.ENEMY_SPRITE_SCALED_LENGTH
+            dir = C.DIR_DOWN
+            break;
+        case 'bottom':
+            x = getRandX()
+            y = C.PLAY_AREA_DOWN_BOUNDARY
+            dir = C.DIR_UP
+            break;
+        case 'right':
+            x = C.PLAY_AREA_RIGHT_BOUNDARY
+            y = getRandY()
+            dir = C.DIR_LEFT
+            break
+        case 'left':
+            x = C.PLAY_AREA_LEFT_BOUNDARY - C.ENEMY_SPRITE_SCALED_WIDTH
+            y = getRandY()
+            dir = C.DIR_RIGHT
+            break;
+        default:
+            break;
     }
-    return { x, y }
+    return { pos: {x, y}, dir }
+}
+
+const getRandom = (num) => {
+    return Math.floor(Math.random() * num)
+}
+
+const getRandX = () => {
+    return getRandom(C.PLAY_AREA_SIDE_LENGTH - C.PLAY_AREA_START_POS) 
+        + C.PLAY_AREA_START_POS
+}
+const getRandY = () => {
+    return getRandom(C.PLAY_AREA_SIDE_LENGTH - C.PLAY_AREA_START_POS) 
 }
 
 class GameCanvas {
@@ -30,12 +60,10 @@ class GameCanvas {
 
     placeNewEnemy() {
         const { hero, ctx } = this;
-        let pos = getRandPos()
-        while (hero.collidedWith({x: pos.x, y:pos.y})) pos = getRandPos()
-        let enemy = new Enemy({
-            pos,
-            ctx
-        })
+        let attrs = getRandStartPos()
+        while (hero.collidedWith({x: attrs.pos.x, y: attrs.pos.y})) 
+            attrs = getRandStartPos()
+        let enemy = new Enemy({ ...attrs,ctx })
         this.enemies.push(enemy)
     }
 

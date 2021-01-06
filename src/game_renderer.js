@@ -25,7 +25,7 @@ class GameRenderer {
         const { gameCanvas, ctx, gameOver } = this;
         
         gameCanvas.hero.move();
-        gameCanvas.moveEnemies();
+        if(C.TOGGLE_ENEMY_MOVEMENT) gameCanvas.moveEnemies();
         
         gameCanvas.checkForCollisions()
         

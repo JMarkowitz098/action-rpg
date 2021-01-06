@@ -1,3 +1,6 @@
+export const TOGGLE_ENEMY_MOVEMENT = true;
+export const TOGGLE_ENEMY_SPAWN = true;
+
 export const UNIT = 5;
 
 export const CANVAS_WIDTH = 600
@@ -63,8 +66,8 @@ export const FRAME_LIMIT = 15
 
 export const HEALTH_COLOR = 'pink'
 export const HEALTH_LENGTH = UNIT * 4
-export const HEALTH_START_X = PLAY_AREA_LEFT_BOUNDARY + 10
-export const HEALTH_START_Y = PLAY_AREA_UP_BOUNDARY + 10
+export const HEALTH_START_X = 10
+export const HEALTH_START_Y = 10
 
 export const HERO_COLOR = 'blue';
 export const HERO_DASH_KEY = 'z';

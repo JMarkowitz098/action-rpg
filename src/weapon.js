@@ -77,8 +77,8 @@ class Weapon extends GameObject {
         this.color = 'white' // Outside of canvas color
         // this.x = C.PLAY_AREA_RIGHT_BOUNDARY
         // this.y = C.PLAY_AREA_DOWN_BOUNDARY
-        this.x = C.PLAY_AREA_RIGHT_BOUNDARY + 50
-        this.y = C.PLAY_AREA_DOWN_BOUNDARY + 50
+        this.x = C.CANVAS_WIDTH
+        this.y = C.CANVAS_LENGTH
     }
 }
 

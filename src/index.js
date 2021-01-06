@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gameRenderer.start()
     setInterval(gameCanvas.changeEnemyDirections, 1000);
-    setInterval(gameCanvas.placeNewEnemy, C.ENEMY_SPAWN_RATE);
+    if(C.TOGGLE_ENEMY_SPAWN) 
+        setInterval(gameCanvas.placeNewEnemy, C.ENEMY_SPAWN_RATE);
 
 });
