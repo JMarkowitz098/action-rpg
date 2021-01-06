@@ -80,12 +80,12 @@ class HeroMovement extends Movement {
                 break;
             case C.WEAPON_DIR_VERTICAL:
                 oldX = x + (C.HERO_SPRITE_SCALED_WIDTH - C.WEAPON_WIDTH) / 2
-                oldY = y + (C.HERO_SPRITE_SCALED_HEIGHT - C.WEAPON_LENGTH) / 2
+                oldY = y + (C.HERO_SPRITE_SCALED_LENGTH - C.WEAPON_LENGTH) / 2
                 delta = C.WEAPON_DIST
                 break;
             case C.WEAPON_DIR_HORIZONTAL:
                 oldX = x - (C.WEAPON_LENGTH - C.HERO_SPRITE_SCALED_WIDTH) / 2
-                oldY = y - (C.WEAPON_WIDTH - C.HERO_SPRITE_SCALED_HEIGHT) / 2
+                oldY = y - (C.WEAPON_WIDTH - C.HERO_SPRITE_SCALED_LENGTH) / 2
                 delta = C.WEAPON_DIST
                 break;
         }

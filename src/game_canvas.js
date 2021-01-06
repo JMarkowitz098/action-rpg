@@ -9,7 +9,7 @@ const getRandPos = () => {
     while (x > C.PLAY_AREA_SIDE_LENGTH 
         || y > C.PLAY_AREA_SIDE_LENGTH
         || x < C.PLAY_AREA_START_POS + C.ENEMY_SPRITE_SCALED_WIDTH
-        || y < C.PLAY_AREA_START_POS + C.ENEMY_SPRITE_SCALED_HEIGHT
+        || y < C.PLAY_AREA_START_POS + C.ENEMY_SPRITE_SCALED_LENGTH
     ){
         x = Math.floor(Math.random() * factor) * C.UNIT
         y = Math.floor(Math.random() * factor) * C.UNIT

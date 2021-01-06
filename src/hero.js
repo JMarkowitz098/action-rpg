@@ -34,7 +34,7 @@ class Hero extends GameObject {
             );
         } else {
             ctx.fillStyle = this.color;
-            ctx.fillRect(x, y, C.HERO_SPRITE_SCALED_WIDTH, C.HERO_SPRITE_SCALED_HEIGHT);
+            ctx.fillRect(x, y, C.HERO_SPRITE_SCALED_WIDTH, C.HERO_SPRITE_SCALED_LENGTH);
         }
     }
 
@@ -57,13 +57,13 @@ class Hero extends GameObject {
         ctx.drawImage(
             image, //image source
             frameX * C.HERO_SPRITE_PANEL_WIDTH, //sx
-            frameY * C.HERO_SPRITE_PANEL_HEIGHT, //sy
+            frameY * C.HERO_SPRITE_PANEL_LENGTH, //sy
             C.HERO_SPRITE_PANEL_WIDTH, //sWIDTH
-            C.HERO_SPRITE_PANEL_HEIGHT, //sHEIGHT
+            C.HERO_SPRITE_PANEL_LENGTH, //sHEIGHT
             canvasX, //dX
             canvasY, //dY
             C.HERO_SPRITE_SCALED_WIDTH, //dWIDTH
-            C.HERO_SPRITE_SCALED_HEIGHT //dHEIGHT
+            C.HERO_SPRITE_SCALED_LENGTH //dHEIGHT
         ); 
     }
 
@@ -117,10 +117,10 @@ class Hero extends GameObject {
     collidedWith(enemy){
         const enemyX = enemy.x
         const enemyY = enemy.y
-        const enemyLength = C.ENEMY_SPRITE_SCALED_HEIGHT
+        const enemyLength = C.ENEMY_SPRITE_SCALED_LENGTH
         const enemyWidth = C.ENEMY_SPRITE_SCALED_WIDTH
         const heroWidth = C.HERO_SPRITE_SCALED_WIDTH
-        const heroLength = C.HERO_SPRITE_SCALED_HEIGHT
+        const heroLength = C.HERO_SPRITE_SCALED_LENGTH
 
         // Detect if 2 rectangles have collided
         return (this.x < enemyX + enemyWidth &&
@@ -171,7 +171,7 @@ class Hero extends GameObject {
             x,
             y,
             C.HERO_SPRITE_SCALED_WIDTH,
-            C.HERO_SPRITE_SCALED_HEIGHT
+            C.HERO_SPRITE_SCALED_LENGTH
         );
     }
 

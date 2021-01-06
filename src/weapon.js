@@ -46,7 +46,7 @@ class Weapon extends GameObject {
         const enemyX = enemyPos.x
         const enemyY = enemyPos.y
         const enemyWidth = C.ENEMY_SPRITE_SCALED_WIDTH
-        const enemyLength = C.ENEMY_SPRITE_SCALED_HEIGHT
+        const enemyLength = C.ENEMY_SPRITE_SCALED_LENGTH
         const weaponWidth = this.dir === C.WEAPON_DIR_VERTICAL 
             ? C.WEAPON_WIDTH : C.WEAPON_LENGTH
         const weaponLength = this.dir === C.WEAPON_DIR_VERTICAL

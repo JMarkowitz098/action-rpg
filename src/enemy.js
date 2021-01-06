@@ -46,13 +46,13 @@ class Enemy extends GameObject {
         ctx.drawImage(
             image, //image source
             frameX * C.ENEMY_SPRITE_PANEL_WIDTH, //sx
-            frameY * C.ENEMY_SPRITE_PANEL_HEIGHT, //sy
+            frameY * C.ENEMY_SPRITE_PANEL_LENGTH, //sy
             C.ENEMY_SPRITE_PANEL_WIDTH, //sWIDTH
-            C.ENEMY_SPRITE_PANEL_HEIGHT, //sHEIGHT
+            C.ENEMY_SPRITE_PANEL_LENGTH, //sHEIGHT
             canvasX, //dX
             canvasY, //dY
             C.ENEMY_SPRITE_SCALED_WIDTH, //dWIDTH
-            C.ENEMY_SPRITE_SCALED_HEIGHT //dHEIGHT
+            C.ENEMY_SPRITE_SCALED_LENGTH //dHEIGHT
         );
     }
 
@@ -88,7 +88,7 @@ class Enemy extends GameObject {
             x,
             y,
             C.ENEMY_SPRITE_SCALED_WIDTH,
-            C.ENEMY_SPRITE_SCALED_HEIGHT
+            C.ENEMY_SPRITE_SCALED_LENGTH
         );
     }
 
@@ -193,7 +193,7 @@ class Enemy extends GameObject {
     validYMove(dir, newY) {
         return dir === 'up'
             ? newY >= C.PLAY_AREA_UP_BOUNDARY + 25
-            : newY <= C.PLAY_AREA_DOWN_BOUNDARY - C.ENEMY_SPRITE_SCALED_HEIGHT
+            : newY <= C.PLAY_AREA_DOWN_BOUNDARY - C.ENEMY_SPRITE_SCALED_LENGTH
     }
 
     validMove(dir, newX, newY) {

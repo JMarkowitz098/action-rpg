@@ -18,7 +18,7 @@ class Movement {
     validYMove(dir, newY) {
         return dir === 'up'
             ? newY >= C.PLAY_AREA_UP_BOUNDARY
-            : newY <= C.PLAY_AREA_DOWN_BOUNDARY - C.HERO_SPRITE_SCALED_HEIGHT
+            : newY <= C.PLAY_AREA_DOWN_BOUNDARY - C.HERO_SPRITE_SCALED_LENGTH
     }
 }
 
