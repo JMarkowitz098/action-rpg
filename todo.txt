@@ -1,3 +1,7 @@
 -Redo sprite sX and sY to be exact
 
 "test": "mocha --require @babel/register --recursive",
+
+Test pages
+https://www.reddit.com/r/learnjavascript/comments/4p3mll/getting_started_with_javascript_tdd/
+https://www.reddit.com/r/javascript/comments/a89b71/finally_i_can_unit_test_my_es6_module_based/

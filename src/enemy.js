@@ -35,7 +35,7 @@ class Enemy extends GameObject {
         const { x, y, spriteDirection, spritePositions } = this
 
         if(this.movement.isInCanvas({x, y})){
-            this.drawHitBox()
+            if (C.TOOGGLE_DRAW_HITBOXES) this.drawHitBox()
             this.changeFrameAttributes()
             this.drawFrame(
                 spritePositions[this.spritePositionsIdx],
@@ -50,10 +50,10 @@ class Enemy extends GameObject {
         const { ctx, image } = this;
         ctx.drawImage(
             image, //image source
-            frameX * C.ENEMY_SPRITE_PANEL_WIDTH, //sx
-            frameY * C.ENEMY_SPRITE_PANEL_LENGTH, //sy
-            C.ENEMY_SPRITE_PANEL_WIDTH, //sWIDTH
-            C.ENEMY_SPRITE_PANEL_LENGTH, //sHEIGHT
+            frameX, //sx
+            frameY, //sy
+            C.ENEMY_WIDTH, //sWIDTH
+            C.ENEMY_LENGTH, //sHEIGHT
             canvasX, //dX
             canvasY, //dY
             C.ENEMY_SPRITE_SCALED_WIDTH, //dWIDTH
@@ -81,7 +81,7 @@ class Enemy extends GameObject {
         this.image = image
         this.spriteDirection = this.getSpriteDir()
         this.frameCount = 0;
-        this.spritePositions = [0, 1, 2, 3];
+        this.spritePositions = C.ENEMY_SPRITE_X_POSITIONS;
         this.spritePositionsIdx = 0;
         this.hasMoved = false;
     }

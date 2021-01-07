@@ -30,7 +30,7 @@ class Hero extends GameObject {
         const { x, y, spriteDirection, hasMoved, spritePositions, ctx} = this
 
         if(this.color === C.HERO_COLOR){
-            this.drawHitBox()
+            if (C.TOOGGLE_DRAW_HITBOXES) this.drawHitBox()
             if(hasMoved) this.changeFrameAttributes()
             this.drawFrame(
                 spritePositions[this.spritePositionsIdx], 
@@ -39,7 +39,9 @@ class Hero extends GameObject {
             );
         } else {
             ctx.fillStyle = this.color;
-            ctx.fillRect(x, y, C.HERO_SPRITE_SCALED_WIDTH, C.HERO_SPRITE_SCALED_LENGTH);
+            ctx.fillRect(
+                x, y, C.HERO_SPRITE_SCALED_WIDTH, C.HERO_SPRITE_SCALED_LENGTH
+            );
         }
     }
 
@@ -61,10 +63,10 @@ class Hero extends GameObject {
         const { ctx, image } = this;
         ctx.drawImage(
             image, //image source
-            frameX * C.HERO_SPRITE_PANEL_WIDTH, //sx
-            frameY * C.HERO_SPRITE_PANEL_LENGTH, //sy
-            C.HERO_SPRITE_PANEL_WIDTH, //sWIDTH
-            C.HERO_SPRITE_PANEL_LENGTH, //sHEIGHT
+            frameX, //sx
+            frameY, //sy
+            C.HERO_WIDTH, //sWIDTH
+            C.HERO_LENGTH, //sHEIGHT
             canvasX, //dX
             canvasY, //dY
             C.HERO_SPRITE_SCALED_WIDTH, //dWIDTH
@@ -78,7 +80,7 @@ class Hero extends GameObject {
         this.image = image
         this.spriteDirection = C.HERO_SPRITE_FACING_DOWN
         this.frameCount = 0;
-        this.spritePositions = [0, 1, 2, 3];
+        this.spritePositions = C.HERO_SPRITE_X_POSITIONS
         this.spritePositionsIdx = 0;
         this.hasMoved = false;
     }
