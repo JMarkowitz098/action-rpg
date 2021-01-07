@@ -1,14 +1,12 @@
 
 class GameObject {
     constructor({ctx, pos, vel, dir, color}){
-        this.ctx = ctx
         this.x = pos.x
         this.y = pos.y
-        this.vel = vel
-        this.dir = dir
-        this.color = color
-
-        // this.isColliding = false;
+        if (ctx) this.ctx = ctx
+        if (vel) this.vel = vel
+        if (dir) this.dir = dir
+        if (color) this.color = color
     }
 }
 

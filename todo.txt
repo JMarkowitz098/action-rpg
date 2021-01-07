@@ -1,2 +1,3 @@
--Fix enemy spawn boundaries
--Fix enemy move boundaries (25 should be a constant)
+-Redo sprite sX and sY to be exact
+
+"test": "mocha --require @babel/register --recursive",

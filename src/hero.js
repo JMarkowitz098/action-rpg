@@ -4,6 +4,8 @@ import GameObject from './game_object'
 import Health from './health'
 import HeroMovement from './hero_movement'
 
+
+
 class Hero extends GameObject {
     constructor(attributes){
         attributes = { 
