@@ -1,5 +1,6 @@
 import * as C from './constants'
 import GameObject from './game_object'
+import WeaponMovement from './weapon_movement'
 
 class Weapon extends GameObject {
     constructor(attributes){
@@ -12,6 +13,8 @@ class Weapon extends GameObject {
 
         this.length = C.WEAPON_LENGTH
         this.width = C.WEAPON_WIDTH
+        this.movement = new WeaponMovement(
+            { width: this.width, length: this.length })
 
         this.putAway = this.putAway.bind(this)
     }
@@ -60,23 +63,20 @@ class Weapon extends GameObject {
      
     }
 
-    getNewDir(dir) {
-        switch (dir) {
-            case C.DIR_UP:
-            case C.DIR_DOWN:
-                return C.WEAPON_DIR_HORIZONTAL
-            case C.DIR_LEFT:
-            case C.DIR_RIGHT:
-                return C.WEAPON_DIR_VERTICAL
-            default:
-                return C.WEAPON_DIR_HORIZONTAL
-        }
+    takeOut(moveData){
+        this.dir = this.movement.getNewDir(moveData.heroDir)
+        const { newX, newY } = this.movement.getNewPosUsingDir(this.dir, {
+            ...moveData,
+        })
+
+        this.color = C.WEAPON_COLOR
+        this.x = newX
+        this.y = newY
+        setTimeout(this.putAway, 50)
     }
 
     putAway() {
         this.color = 'white' // Outside of canvas color
-        // this.x = C.PLAY_AREA_RIGHT_BOUNDARY
-        // this.y = C.PLAY_AREA_DOWN_BOUNDARY
         this.x = C.CANVAS_WIDTH
         this.y = C.CANVAS_LENGTH
     }

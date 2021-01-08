@@ -5,9 +5,10 @@ class HeroMovement extends Movement {
     constructor(attributes){
         super(attributes)
     }
+    
     move(moveData) {
         const { x, y, dir } = moveData;
-        const { newX, newY } = this.getNewPosUsingDir(C.HERO_MOVEMENT, moveData)
+        const { newX, newY } = this.getNewPosUsingDir(moveData)
 
         return this.validMove(dir, newX, newY)
             ? { x: newX, y: newY, moved: (x !== newX || y !== newY) }
@@ -35,65 +36,43 @@ class HeroMovement extends Movement {
         return filtered
     }
 
-    getNewPosUsingDir(type, moveData) {
-        const { oldX, oldY, delta } = this.getCoordInfo(type, moveData)
-        let newX = oldX
-        let newY = oldY
+    getNewPosUsingDir(moveData) {
+        const { x, y, dir, vel } = moveData
+        let newX = x
+        let newY = y
+        let delta = C.HERO_MOVE_LENGTH * vel
 
-        switch (moveData.dir) {
+        switch (dir) {
             case C.DIR_UP:
-                newY = newY - delta
+                newY = y - delta
                 break;
             case C.DIR_DOWN:
-                newY = newY + delta
+                newY = y + delta
                 break;
             case C.DIR_LEFT:
-                newX = newX - delta
+                newX = x - delta
                 break;
             case C.DIR_RIGHT:
-                newX = newX + delta
+                newX = x + delta
                 break;
             case C.DIR_LEFT_UP:
-                newX = newX - delta
-                newY = newY - delta
+                newX = x - delta
+                newY = y - delta
                 break;
             case C.DIR_RIGHT_UP:
-                newX = newX + delta
-                newY = newY - delta
+                newX = x + delta
+                newY = y - delta
                 break;
             case C.DIR_DOWN_LEFT:
-                newX = newX - delta
-                newY = newY + delta
+                newX = x - delta
+                newY = y + delta
                 break;
             case C.DIR_DOWN_RIGHT:
-                newX = newX + delta
-                newY = newY + delta
+                newX = x + delta
+                newY = y + delta
                 break;
         }
         return ({ newX, newY })
-    }
-
-    getCoordInfo(type, { x, y, vel }) {
-        let oldX, oldY, delta;
-        switch (type) {
-            case C.HERO_MOVEMENT:
-                oldX = x;
-                oldY = y;
-                delta = C.HERO_MOVE_LENGTH * vel
-                break;
-            case C.WEAPON_DIR_VERTICAL:
-                oldX = x + (C.HERO_SPRITE_SCALED_WIDTH - C.WEAPON_WIDTH) / 2
-                oldY = y + (C.HERO_SPRITE_SCALED_LENGTH - C.WEAPON_LENGTH) / 2
-                delta = C.WEAPON_DIST
-                break;
-            case C.WEAPON_DIR_HORIZONTAL:
-                oldX = x - (C.WEAPON_LENGTH - C.HERO_SPRITE_SCALED_WIDTH) / 2
-                oldY = y - (C.WEAPON_WIDTH - C.HERO_SPRITE_SCALED_LENGTH) / 2
-                delta = C.WEAPON_DIST
-                break;
-        }
-
-        return { oldX, oldY, delta }
     }
 }
 

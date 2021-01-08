@@ -15,6 +15,10 @@ export const PLAY_AREA_DOWN_BOUNDARY = 0 + PLAY_AREA_START_POS + PLAY_AREA_SIDE_
 export const PLAY_AREA_LEFT_BOUNDARY = 0 + PLAY_AREA_START_POS;
 export const PLAY_AREA_RIGHT_BOUNDARY = 0 + PLAY_AREA_START_POS + PLAY_AREA_SIDE_LENGTH;
 export const PLAY_AREA_OUTSIDE_COLOR = 'white'
+export const PLAY_AREA_S_WIDTH = 457
+export const PLAY_AREA_S_HEIGHT = 415
+export const PLAY_AREA_SX = 12
+export const PLAY_AREA_SY = 32
 
 export const DIR_DOWN = 'down'
 export const DIR_LEFT = 'left'
@@ -78,7 +82,6 @@ export const HERO_MOVE_LENGTH = 4;
 export const HERO_START_POS = { x: PLAY_AREA_START_POS, y: PLAY_AREA_START_POS}
 export const HERO_START_DIR = DIR_DOWN
 export const HERO_START_HEALTH = 3
-export const HERO_MOVEMENT = 'hero_movement'
 export const HERO_DASH_SPEED = 8
 export const HERO_DASH_TIME = 50
 

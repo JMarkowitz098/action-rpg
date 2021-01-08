@@ -137,18 +137,7 @@ class Hero extends GameObject {
     }
 
     useWeapon(){
-        this.weapon.dir = this.weapon.getNewDir(this.dir)
-        const { newX, newY } = this.movement.getNewPosUsingDir(this.weapon.dir,{
-            x: this.x,
-            y: this.y,
-            dir: this.dir,
-            vel: this.vel
-        })
-
-        this.weapon.color = C.WEAPON_COLOR
-        this.weapon.x = newX
-        this.weapon.y = newY
-        setTimeout(this.weapon.putAway, 50)
+        this.weapon.takeOut({x: this.x, y: this.y, heroDir: this.dir})
     }
 
     getSpriteDir(){
