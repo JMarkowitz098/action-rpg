@@ -5,7 +5,6 @@ class Health extends GameObject {
     constructor(attributes){
         attributes = {
             ...attributes,
-            vel: 0,
             color: C.HEALTH_COLOR,
         }
         super(attributes)

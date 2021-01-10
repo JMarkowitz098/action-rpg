@@ -1,4 +1,4 @@
--Redo sprite sX and sY to be exact
+
 
 "test": "mocha --require @babel/register --recursive",
 

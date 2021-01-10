@@ -49,12 +49,12 @@ class WeaponMovement extends Movement {
         let oldX, oldY;
         switch (type) {
             case C.WEAPON_DIR_VERTICAL:
-                oldX = x + (C.HERO_SPRITE_SCALED_WIDTH - C.WEAPON_WIDTH) / 2
-                oldY = y + (C.HERO_SPRITE_SCALED_LENGTH - C.WEAPON_LENGTH) / 2
+                oldX = x + (C.HERO_SPRITE_SCALED_WIDTH - this.width) / 2
+                oldY = y + (C.HERO_SPRITE_SCALED_LENGTH - this.length) / 2
                 break;
             case C.WEAPON_DIR_HORIZONTAL:
-                oldX = x - (C.WEAPON_LENGTH - C.HERO_SPRITE_SCALED_WIDTH) / 2
-                oldY = y - (C.WEAPON_WIDTH - C.HERO_SPRITE_SCALED_LENGTH) / 2
+                oldX = x - (this.length - C.HERO_SPRITE_SCALED_WIDTH) / 2
+                oldY = y - (this.width - C.HERO_SPRITE_SCALED_LENGTH) / 2
                 break;
         }
 

@@ -6,7 +6,7 @@ class GameObject {
         if (ctx) this.ctx = ctx
         if (vel) this.vel = vel
         if (dir) this.dir = dir
-        if (color) this.color = color
+        if (color) this.color = color //Remove when everything is a sprite
     }
 }
 

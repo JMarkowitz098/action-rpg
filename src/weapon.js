@@ -55,7 +55,7 @@ class Weapon extends GameObject {
         const weaponLength = this.dir === C.WEAPON_DIR_VERTICAL
             ? C.WEAPON_LENGTH : C.WEAPON_WIDTH
 
-        // Detect if 2 rectangles have collided
+        // Detect if 2 rectangles have collided //Eventually pull out into collison class
         return (this.x < enemyX + enemyWidth &&
             this.x + weaponWidth > enemyX &&
             this.y < enemyY + enemyLength &&

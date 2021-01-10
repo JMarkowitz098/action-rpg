@@ -1,6 +1,6 @@
 export const TOGGLE_ENEMY_MOVEMENT = true;
 export const TOGGLE_ENEMY_SPAWN = true;
-export const TOOGGLE_DRAW_HITBOXES = false;
+// export const TOOGGLE_DRAW_HITBOXES = true;
 
 export const UNIT = 5;
 
@@ -93,8 +93,6 @@ export const HERO_SPRITE_FACING_DOWN = 2;
 export const HERO_SPRITE_FACING_RIGHT = 131;
 export const HERO_SPRITE_FACING_UP = 194;
 export const HERO_SPRITE_FACING_LEFT = 67;
-
-
 
 export const WEAPON_COLOR = 'green'
 export const WEAPON_LENGTH = UNIT * 20

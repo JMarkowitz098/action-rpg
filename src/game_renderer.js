@@ -50,7 +50,7 @@ class GameRenderer {
                 gameCanvas.hero.changeDir(this.keysDown)
         }
 
-        if (Object.values(this.keysDown).every(val => val === false))
+        if (Object.values(this.keysDown).every(val => val === false)) // Change with getMoveKeysDown()
             gameCanvas.hero.changeVel(0)
     }
 
@@ -71,7 +71,6 @@ class GameRenderer {
 
         if (e.key === 'x')
             gameCanvas.hero.useWeapon()
-        
     }
 
     getMoveKeysDown(){

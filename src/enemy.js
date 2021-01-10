@@ -21,7 +21,6 @@ class Enemy extends GameObject {
         }
         super(attributes)
 
-        this.length = C.ENEMY_SIZE
         this.changeDir = this.changeDir.bind(this)
         this.movement = new EnemyMovement({
             width: C.ENEMY_SPRITE_SCALED_WIDTH,
@@ -124,12 +123,6 @@ class Enemy extends GameObject {
             case C.DIR_DOWN_RIGHT:
                 return C.ENEMY_SPRITE_FACING_DOWN
         }
-    }
-
-    die() {
-        this.color = C.PLAY_AREA_OUTSIDE_COLOR
-        this.x = null;
-        this.y = null;
     }
 
     move() {

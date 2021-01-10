@@ -2,6 +2,7 @@ import * as C from './constants'
 import Hero from './hero'
 import Enemy from './enemy'
 
+// Represents the plying area
 class GameCanvas {
     constructor({ ctx }) {
         this.ctx = ctx;
@@ -17,7 +18,7 @@ class GameCanvas {
     placeNewEnemy() {
         const { hero, ctx } = this;
         let attrs = getRandStartPos()
-        while (hero.collidedWith({x: attrs.pos.x, y: attrs.pos.y})) 
+        while (hero.collidedWith({x: attrs.pos.x, y: attrs.pos.y})) // Don't need anymore
             attrs = getRandStartPos()
         let enemy = new Enemy({ ...attrs,ctx })
         this.enemies.push(enemy)
@@ -86,14 +87,13 @@ class GameCanvas {
         let score = parseInt(scoreStr.split(':')[1])
         score += 1
         scoreEle.innerHTML = `Score: ${score}`;
-
     }
 
     clearCanvas() {
         const { ctx } = this;
         ctx.clearRect(
-            C.PLAY_AREA_SIDE_LENGTH,
-            C.PLAY_AREA_SIDE_LENGTH,
+            C.PLAY_AREA_SIDE_LENGTH, //Why is this not an x coordinate?
+            C.PLAY_AREA_SIDE_LENGTH, //Why is this not an y coordinate?
             C.PLAY_AREA_SIDE_LENGTH,
             C.PLAY_AREA_SIDE_LENGTH
         );
@@ -105,14 +105,6 @@ class GameCanvas {
             C.PLAY_AREA_SIDE_LENGTH + 150,
             C.PLAY_AREA_SIDE_LENGTH + 150
         );
-
-        // ctx.fillStyle = C.PLAY_AREA_COLOR;
-        // ctx.fillRect(
-        //     C.PLAY_AREA_START_POS,
-        //     C.PLAY_AREA_START_POS,
-        //     C.PLAY_AREA_SIDE_LENGTH,
-        //     C.PLAY_AREA_SIDE_LENGTH
-        // );
 
         this.drawFrame(
             C.PLAY_AREA_SX,

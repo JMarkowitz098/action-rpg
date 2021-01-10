@@ -110,7 +110,7 @@ class Hero extends GameObject {
     }
     
     isVulnerable(){
-        return this.color === C.HERO_COLOR
+        return this.color === C.HERO_COLOR //Change to isVulnerable property
     }
 
     changeDir(keysDown){
