@@ -24,16 +24,16 @@ class HeroMovement extends Movement {
         return C.DIR_POSSIBLE_MOVES.includes(newDir) ? newDir : dir;
     }
 
+    // Reverse hero's direction when receivng opposing directions
     filterExtraKeys(newDir, dir) {
         let filtered = newDir.filter(([key, val]) => val)
         if (filtered.length === 1) return filtered
 
-        if (filtered[0][0] === C.DIR_RIGHT && filtered[1][0] === C.DIR_LEFT)
-            filtered = filtered[0][0] === dir ? [filtered[1]] : [filtered[0]]
-        if (filtered[0][0] === C.DIR_DOWN && filtered[1][0] === C.DIR_UP)
-            filtered = filtered[0][0] === dir ? [filtered[1]] : [filtered[0]]
+        if (filtered[0][0] === C.DIR_RIGHT && filtered[1][0] === C.DIR_LEFT
+            || filtered[0][0] === C.DIR_DOWN && filtered[1][0] === C.DIR_UP) 
+                filtered = filtered[0][0] === dir ? [filtered[1]] : [filtered[0]]
 
-        return filtered
+                return filtered
     }
 
     getNewPosUsingDir(moveData) {

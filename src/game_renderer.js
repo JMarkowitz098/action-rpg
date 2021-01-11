@@ -59,7 +59,7 @@ class GameRenderer {
 
         if (dirOptions.hasOwnProperty(e.key)){
             keysDown[dirOptions[e.key]] = true;
-            gameCanvas.hero.changeVel(1)
+            gameCanvas.hero.changeVel(C.HERO_NORMAL_VEL)
             gameCanvas.hero.changeDir(keysDown)
         }
 

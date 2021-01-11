@@ -1,6 +1,6 @@
 export const TOGGLE_ENEMY_MOVEMENT = true;
-export const TOGGLE_ENEMY_SPAWN = true;
-// export const TOOGGLE_DRAW_HITBOXES = true;
+export const TOGGLE_ENEMY_SPAWN = false;
+export const TOOGGLE_DRAW_HITBOXES = true;
 
 export const UNIT = 5;
 
@@ -75,6 +75,7 @@ export const HEALTH_START_Y = 10
 
 export const HERO_COLOR = 'blue';
 export const HERO_DASH_KEY = 'z';
+export const HERO_NORMAL_VEL = 1;
 export const HERO_DASH_VEL = 3;
 export const HERO_LENGTH = 44;
 export const HERO_WIDTH = 25;
