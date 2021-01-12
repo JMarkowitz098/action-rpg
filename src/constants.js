@@ -1,6 +1,6 @@
 export const TOGGLE_ENEMY_MOVEMENT = true;
 export const TOGGLE_ENEMY_SPAWN = true;
-export const TOOGGLE_DRAW_HITBOXES = true;
+export const TOOGGLE_DRAW_HITBOXES = false;
 
 export const UNIT = 5;
 

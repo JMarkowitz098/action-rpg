@@ -2,17 +2,10 @@ import * as C from './constants'
 import Movement from './movement'
 
 class EnemyMovement extends Movement {
-
-    changeDir() {
-        this.dir = this.getRandomDir()
-    }
-
     move(moveData) {
         const { x, y, dir, vel } = moveData;
-
         let newX = x
         let newY = y
-        let newPos
 
         switch (dir) {
             case C.DIR_UP:

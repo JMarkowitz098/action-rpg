@@ -1,6 +1,7 @@
 import * as C from './constants'
 import EnemyMovement from './enemy_movement'
 import GameObject from './game_object'
+import Sprite from './sprite'
 
 class Enemy extends GameObject {
     constructor(attributes) {
@@ -15,63 +16,30 @@ class Enemy extends GameObject {
             width: C.ENEMY_SPRITE_SCALED_WIDTH,
             length: C.ENEMY_SPRITE_SCALED_LENGTH
         })
-
-        this.initSprite()
+        this.sprite = new Sprite({
+            imageSrc: '/Users/jared/Desktop/Coding/action_rpg/Patreon sprites 1/17.png',
+            spritePositions: C.ENEMY_SPRITE_X_POSITIONS,
+            facingDown: C.ENEMY_SPRITE_FACING_DOWN,
+            facingLeft: C.ENEMY_SPRITE_FACING_LEFT,
+            facingUp: C.ENEMY_SPRITE_FACING_UP,
+            facingRight: C.ENEMY_SPRITE_FACING_RIGHT,
+            width: C.ENEMY_WIDTH,
+            length: C.ENEMY_LENGTH,
+            scaledWidth: C.ENEMY_SPRITE_SCALED_WIDTH,
+            scaledLength: C.ENEMY_SPRITE_SCALED_LENGTH,
+            dir: this.dir
+        })
     }
 
     draw() {
-        const { x, y, spriteDirection, spritePositions } = this
+        const { x, y, ctx, dir } = this
 
         if(this.movement.isInCanvas({x, y})){
             if (C.TOOGGLE_DRAW_HITBOXES) this.drawHitBox()
-            this.changeFrameAttributes()
-            this.drawFrame(
-                spritePositions[this.spritePositionsIdx],
-                spriteDirection,
-                x, y
-            );
+            this.sprite.changeFrameAttributes(dir)
+            this.sprite.drawFrame(x, y, ctx);
         }
        
-    }
-
-    drawFrame(frameX, frameY, canvasX, canvasY) {
-        const { ctx, image } = this;
-        ctx.drawImage(
-            image, //image source
-            frameX, //sx
-            frameY, //sy
-            C.ENEMY_WIDTH, //sWIDTH
-            C.ENEMY_LENGTH, //sHEIGHT
-            canvasX, //dX
-            canvasY, //dY
-            C.ENEMY_SPRITE_SCALED_WIDTH, //dWIDTH
-            C.ENEMY_SPRITE_SCALED_LENGTH //dHEIGHT
-        );
-    }
-
-    changeFrameAttributes() {
-        this.frameCount++;
-        if (this.frameCount >= C.FRAME_LIMIT) {
-            this.frameCount = 0;
-            this.changeSpritePositions()
-        }
-    }
-
-    changeSpritePositions() {
-        this.spritePositionsIdx++;
-        if (this.spritePositionsIdx >= this.spritePositions.length)
-            this.spritePositionsIdx = 0;
-    }
-
-    initSprite(){
-        let image = new Image
-        image.src = '/Users/jared/Desktop/Coding/action_rpg/Patreon sprites 1/17.png'
-        this.image = image
-        this.spriteDirection = this.getSpriteDir()
-        this.frameCount = 0;
-        this.spritePositions = C.ENEMY_SPRITE_X_POSITIONS;
-        this.spritePositionsIdx = 0;
-        this.hasMoved = false;
     }
 
     drawHitBox(){
@@ -87,31 +55,10 @@ class Enemy extends GameObject {
 
     changeDir() {
         this.dir = this.movement.getRandomDir(this.dir)
-        this.spriteDirection = this.getSpriteDir()
     }
 
     changeVel(vel) {
         this.vel = vel
-    }
-
-    getSpriteDir() {
-        const { dir } = this
-        switch (dir) {
-            case C.DIR_UP:
-                return C.ENEMY_SPRITE_FACING_UP
-            case C.DIR_DOWN:
-                return C.ENEMY_SPRITE_FACING_DOWN
-            case C.DIR_LEFT:
-                return C.ENEMY_SPRITE_FACING_LEFT
-            case C.DIR_RIGHT:
-                return C.ENEMY_SPRITE_FACING_RIGHT
-            case C.DIR_LEFT_UP:
-            case C.DIR_RIGHT_UP:
-                return C.ENEMY_SPRITE_FACING_UP
-            case C.DIR_DOWN_LEFT:
-            case C.DIR_DOWN_RIGHT:
-                return C.ENEMY_SPRITE_FACING_DOWN
-        }
     }
 
     move() {
@@ -125,7 +72,6 @@ class Enemy extends GameObject {
 
         this.x = newPos.x
         this.y = newPos.y
-        this.spriteDirection = this.getSpriteDir();
     }
 }
 
