@@ -1,17 +1,6 @@
 import * as C from './constants'
 import EnemyMovement from './enemy_movement'
-// import Movement from './movement'
 import GameObject from './game_object'
-
-const getRandomDir = (oldDir = '') => {
-        let randIdx = Math.floor(Math.random() * C.DIR_POSSIBLE_MOVES.length)
-        let newDir = C.DIR_POSSIBLE_MOVES[randIdx]
-        while(oldDir === newDir){
-            randIdx = Math.floor(Math.random() * C.DIR_POSSIBLE_MOVES.length)
-            newDir = C.DIR_POSSIBLE_MOVES[randIdx]
-        }
-        return newDir
-}
 
 class Enemy extends GameObject {
     constructor(attributes) {
@@ -97,7 +86,7 @@ class Enemy extends GameObject {
     }
 
     changeDir() {
-        this.dir = getRandomDir()
+        this.dir = this.movement.getRandomDir(this.dir)
         this.spriteDirection = this.getSpriteDir()
     }
 
@@ -126,70 +115,17 @@ class Enemy extends GameObject {
     }
 
     move() {
-        const { x, y, dir, vel } = this;
-        let newX = x
-        let newY = y;
-        switch (dir) {
-            case C.DIR_UP:
-                newY = y - C.ENEMY_MOVE_LENGTH * vel
-                break;
-            case C.DIR_DOWN:
-                newY = y + C.ENEMY_MOVE_LENGTH * vel
-                break;
-            case C.DIR_LEFT:
-                newX = x - C.ENEMY_MOVE_LENGTH * vel
-                break;
-            case C.DIR_RIGHT:
-                newX = x + C.ENEMY_MOVE_LENGTH * vel
-                break;
-            case C.DIR_LEFT_UP:
-                newX = x - C.ENEMY_MOVE_LENGTH * vel * .6
-                newY = y - C.ENEMY_MOVE_LENGTH * vel * .6
-                break;
-            case C.DIR_RIGHT_UP:
-                newX = x + C.ENEMY_MOVE_LENGTH * vel * .6
-                newY = y - C.ENEMY_MOVE_LENGTH * vel * .6
-                break;
-            case C.DIR_DOWN_LEFT:
-                newX = x - C.ENEMY_MOVE_LENGTH * vel * .6
-                newY = y + C.ENEMY_MOVE_LENGTH * vel * .6
-                break;
-            case C.DIR_DOWN_RIGHT:
-                newX = x + C.ENEMY_MOVE_LENGTH * vel * .6
-                newY = y + C.ENEMY_MOVE_LENGTH * vel * .6
-                break;
+        const { x, y, dir, vel } = this
+        let newPos = this.movement.move({ x, y, dir,vel })
+
+        while(!this.movement.validMove(newPos.dir, newPos.x, newPos.y)){
+            this.dir = this.movement.getRandomDir(this.dir)
+            newPos = this.movement.move({ x, y, dir: this.dir, vel })
         }
 
-        if (this.movement.validMove(dir, newX, newY)) {
-            this.x = newX
-            this.y = newY
-            this.spriteDirection = this.getSpriteDir()
-        } else {
-            this.dir = this.getRandomDir(dir)
-            this.move()
-        }
-
-        // Eventually move into enemy movement class
-        // let newPos = this.movement.move({
-        //     x: this.x,
-        //     y: this.y,
-        //     dir: this.dir,
-        //     vel: this.vel
-        // })
-
-        // this.x = newPos.x
-        // this.y = newPos.y
-        
-    }
-
-    getRandomDir(oldDir = '') {
-        let randIdx = Math.floor(Math.random() * C.DIR_POSSIBLE_MOVES.length)
-        let newDir = C.DIR_POSSIBLE_MOVES[randIdx]
-        while (oldDir === newDir) {
-            randIdx = Math.floor(Math.random() * C.DIR_POSSIBLE_MOVES.length)
-            newDir = C.DIR_POSSIBLE_MOVES[randIdx]
-        }
-        return newDir
+        this.x = newPos.x
+        this.y = newPos.y
+        this.spriteDirection = this.getSpriteDir();
     }
 }
 

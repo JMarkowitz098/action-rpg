@@ -9,8 +9,6 @@ class EnemyMovement extends Movement {
 
     move(moveData) {
         const { x, y, dir, vel } = moveData;
-        if (this.validMove(dir, x, y)) 
-            return { x, y }
 
         let newX = x
         let newY = y
@@ -30,31 +28,24 @@ class EnemyMovement extends Movement {
                 newX = x + C.ENEMY_MOVE_LENGTH * vel
                 break;
             case C.DIR_LEFT_UP:
-                newX = x - C.ENEMY_MOVE_LENGTH * vel
-                newY = y - C.ENEMY_MOVE_LENGTH * vel
+                newX = x - C.ENEMY_MOVE_LENGTH * vel * .6
+                newY = y - C.ENEMY_MOVE_LENGTH * vel * .6
                 break;
             case C.DIR_RIGHT_UP:
-                newX = x + C.ENEMY_MOVE_LENGTH * vel
-                newY = y - C.ENEMY_MOVE_LENGTH * vel
+                newX = x + C.ENEMY_MOVE_LENGTH * vel * .6
+                newY = y - C.ENEMY_MOVE_LENGTH * vel * .6
                 break;
             case C.DIR_DOWN_LEFT:
-                newX = x - C.ENEMY_MOVE_LENGTH * vel
-                newY = y + C.ENEMY_MOVE_LENGTH * vel
+                newX = x - C.ENEMY_MOVE_LENGTH * vel * .6
+                newY = y + C.ENEMY_MOVE_LENGTH * vel * .6
                 break;
             case C.DIR_DOWN_RIGHT:
-                newX = x + C.ENEMY_MOVE_LENGTH * vel
-                newY = y + C.ENEMY_MOVE_LENGTH * vel
+                newX = x + C.ENEMY_MOVE_LENGTH * vel * .6
+                newY = y + C.ENEMY_MOVE_LENGTH * vel * .6
                 break;
         }
 
-        if (this.validMove(dir, newX, newY)) {
-            return {x: newX, y: newY}
-        } else {
-            let newDir = this.getRandomDir(dir)
-            newPos = this.move({x, y, vel, dir: newDir})
-        }
-
-        return newPos
+        return {x: newX, y: newY, dir}
     }
 
     getRandomDir(oldDir = '') {
