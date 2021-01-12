@@ -27,14 +27,14 @@ class Movement {
 
     validXMove(dir, newX) {
         return dir === 'left'
-            ? newX >= C.PLAY_AREA_LEFT_BOUNDARY
-            : newX <= C.PLAY_AREA_RIGHT_BOUNDARY - this.width
+            ? newX > C.PLAY_AREA_LEFT_BOUNDARY
+            : newX < C.PLAY_AREA_RIGHT_BOUNDARY - this.width
     }
 
     validYMove(dir, newY) {
         return dir === 'up'
-            ? newY >= C.PLAY_AREA_UP_BOUNDARY
-            : newY <= C.PLAY_AREA_DOWN_BOUNDARY - this.length
+            ? newY > C.PLAY_AREA_UP_BOUNDARY
+            : newY < C.PLAY_AREA_DOWN_BOUNDARY - this.length
     }
 }
 
