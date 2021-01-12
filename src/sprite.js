@@ -18,7 +18,6 @@ class Sprite {
         this.frameCount = 0;
         this.spritePositions = spritePositions
         this.spritePositionsIdx = 0;
-        this.hasMoved = false;
         this.facingDown = facingDown;
         this.facingLeft = facingLeft;
         this.facingUp = facingUp;
