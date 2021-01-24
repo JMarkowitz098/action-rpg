@@ -1,6 +1,6 @@
 export const TOGGLE_ENEMY_MOVEMENT = true;
 export const TOGGLE_ENEMY_SPAWN = false;
-export const TOOGGLE_DRAW_HITBOXES = true;
+export const TOOGGLE_DRAW_HITBOXES = false;
 
 export const UNIT = 5;
 
@@ -99,9 +99,10 @@ export const WEAPON_COLOR = 'green'
 export const WEAPON_LENGTH = UNIT * 10
 export const WEAPON_WIDTH = UNIT * 7
 export const WEAPON_DIST = 60
-export const WEAPON_DELTA_START = -30
-export const WEAPON_DELTA_END = 50
+export const WEAPON_DELTA_START = -40
+export const WEAPON_DELTA_END = 60
 export const WEAPON_DELTA_INTERVAL = 7
+export const WEAPON_DURATION = 250
 
 export const WEAPON_SPRITE_LENGTH = 60
 export const WEAPON_SPRITE_WIDTH = 50

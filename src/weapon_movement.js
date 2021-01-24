@@ -14,9 +14,13 @@ class WeaponMovement extends Movement {
 
         switch (moveData.heroDir) {
             case C.DIR_UP:
+            case C.DIR_LEFT_UP:
+            case C.DIR_RIGHT_UP:
                 newY = newY - delta
                 break;
             case C.DIR_DOWN:
+            case C.DIR_DOWN_LEFT:
+            case C.DIR_DOWN_RIGHT:
                 newY = newY + delta
                 break;
             case C.DIR_LEFT:
@@ -24,14 +28,6 @@ class WeaponMovement extends Movement {
                 break;
             case C.DIR_RIGHT:
                 newX = newX + delta
-                break;
-            case C.DIR_LEFT_UP:
-                newX = newX - delta
-                newY = newY - delta
-                break;
-            case C.DIR_RIGHT_UP:
-                newX = newX + delta
-                newY = newY - delta
                 break;
             case C.DIR_DOWN_LEFT:
                 newX = newX - delta
@@ -50,6 +46,10 @@ class WeaponMovement extends Movement {
         switch (type) {
             case C.DIR_LEFT:
             case C.DIR_RIGHT:
+            case C.DIR_RIGHT_UP:
+            case C.DIR_DOWN_RIGHT:
+            case C.DIR_DOWN_LEFT:
+            case C.DIR_LEFT_UP:
                 oldX = x + (C.HERO_SPRITE_SCALED_WIDTH - width) / 2
                 oldY = y + (C.HERO_SPRITE_SCALED_LENGTH - length) / 2
                 break;

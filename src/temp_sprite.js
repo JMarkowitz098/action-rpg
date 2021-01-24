@@ -13,7 +13,6 @@ class TempSprite {
 
     drawFrame(x, y, dWidth, dLength, dir, ctx) {
 
-
         ctx.drawImage(
             this.image, //image source
             C.WEAPON_SPRITE_X, //sx

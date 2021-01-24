@@ -33,6 +33,8 @@ class Weapon extends GameObject {
 
         switch (this.dir) {
             case C.DIR_UP:
+            case C.DIR_LEFT_UP:
+            case C.DIR_RIGHT_UP:
                 while (first < last) {
                     moveDeltaXs.push(first)
                     moveDeltaYs.push(0)
@@ -42,6 +44,8 @@ class Weapon extends GameObject {
                 }
                 break;
             case C.DIR_DOWN:
+            case C.DIR_DOWN_LEFT:
+            case C.DIR_DOWN_RIGHT:
                 while (first < last) {
                     moveDeltaXs.push(last)
                     moveDeltaYs.push(0)
@@ -84,9 +88,13 @@ class Weapon extends GameObject {
             case C.DIR_RIGHT:
                 this.drawRight()
             case C.DIR_UP:
+            case C.DIR_LEFT_UP:
+            case C.DIR_RIGHT_UP:
                 this.drawUp();
                 break;
             case C.DIR_DOWN:
+            case C.DIR_DOWN_LEFT:
+            case C.DIR_DOWN_RIGHT:
                 this.drawDown()
                 break;
        
@@ -153,7 +161,7 @@ class Weapon extends GameObject {
         this.updatePosUsingHeroXY({...moveData, length, width})
         this.sprite.frameCount = 0;
         this.sprite.spriteAttrsIdx = 0;
-        setTimeout(this.putAway, 300) // Causes sword to be put away
+        setTimeout(this.putAway, C.WEAPON_DURATION) // Causes sword to be put away
     }
 
     updatePosUsingHeroXY(moveData){
