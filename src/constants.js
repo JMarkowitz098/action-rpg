@@ -1,6 +1,6 @@
 export const TOGGLE_ENEMY_MOVEMENT = true;
-export const TOGGLE_ENEMY_SPAWN = true;
-export const TOOGGLE_DRAW_HITBOXES = false;
+export const TOGGLE_ENEMY_SPAWN = false;
+export const TOOGGLE_DRAW_HITBOXES = true;
 
 export const UNIT = 5;
 
@@ -96,12 +96,20 @@ export const HERO_SPRITE_FACING_UP = 194;
 export const HERO_SPRITE_FACING_LEFT = 67;
 
 export const WEAPON_COLOR = 'green'
-export const WEAPON_LENGTH = UNIT * 20
-export const WEAPON_WIDTH = UNIT * 12
+export const WEAPON_LENGTH = UNIT * 10
+export const WEAPON_WIDTH = UNIT * 7
 export const WEAPON_DIST = 60
-export const WEAPON_DIR_HORIZONTAL = 'horizontal'
-export const WEAPON_DIR_VERTICAL = 'vertical'
-export const WEAPON_DIR_DIAG_LEFT = 'diag_left'
-export const WEAPON_DIR_DIAG_RIGHT = 'diag_right'
+export const WEAPON_DELTA_START = -30
+export const WEAPON_DELTA_END = 50
+export const WEAPON_DELTA_INTERVAL = 7
+
+export const WEAPON_SPRITE_LENGTH = 60
+export const WEAPON_SPRITE_WIDTH = 50
+export const WEAPON_SPRITE_X = 513;
+export const WEAPON_SPRITE_Y = 30;
+export const WEAPON_SPRITE_FACING_DOWN = 5;
+export const WEAPON_SPRITE_FACING_RIGHT = 5;
+export const WEAPON_SPRITE_FACING_UP = 13;
+export const WEAPON_SPRITE_FACING_LEFT = 7;
 
 

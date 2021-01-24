@@ -71,6 +71,12 @@ class GameRenderer {
 
         if (e.key === 'x')
             gameCanvas.hero.useWeapon()
+
+        if (e.key === 'r'){
+            gameCanvas.hero.weapon.sprite.increaseFrame()
+        }
+        if (e.key === 'e')
+            gameCanvas.hero.weapon.sprite.decreaseFrame()
     }
 
     getMoveKeysDown(){

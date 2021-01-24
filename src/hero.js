@@ -5,8 +5,6 @@ import Health from './health'
 import HeroMovement from './hero_movement'
 import Sprite from './sprite'
 
-
-
 class Hero extends GameObject {
     constructor(attributes){
         attributes = { 
@@ -25,7 +23,7 @@ class Hero extends GameObject {
         })
         this.hasMoved = false;
         this.sprite = new Sprite({
-            imageSrc: '/Users/jared/Desktop/Coding/action_rpg/Patreon sprites 1/14.png',
+            imageSrc: '../sprite_sheets/Patreon sprites 1/14.png',
             spritePositions: C.HERO_SPRITE_X_POSITIONS,
             facingDown: C.HERO_SPRITE_FACING_DOWN,
             facingLeft: C.HERO_SPRITE_FACING_LEFT,
@@ -38,6 +36,7 @@ class Hero extends GameObject {
             dir: this.dir
         })
         this.sprite.changeFrameAttributes(this.dir)
+
     }
 
     draw() {
@@ -133,6 +132,17 @@ class Hero extends GameObject {
         this.y = newPos.y
         this.spriteDirection = this.sprite.getSpriteDir(this.dir)
         this.hasMoved = newPos.moved
+        
+        if (this.weapon.isOut) 
+            this.weapon.updatePosUsingHeroXY(
+                { 
+                    x: this.x, 
+                    y: this.y, 
+                    heroDir: this.dir,
+                    length: this.weapon.length,
+                    width: this.weapon.width
+                }
+            )
     }
 
     dash(){

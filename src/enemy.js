@@ -17,7 +17,7 @@ class Enemy extends GameObject {
             length: C.ENEMY_SPRITE_SCALED_LENGTH
         })
         this.sprite = new Sprite({
-            imageSrc: '/Users/jared/Desktop/Coding/action_rpg/Patreon sprites 1/17.png',
+            imageSrc: '../sprite_sheets/Patreon sprites 1/17.png',
             spritePositions: C.ENEMY_SPRITE_X_POSITIONS,
             facingDown: C.ENEMY_SPRITE_FACING_DOWN,
             facingLeft: C.ENEMY_SPRITE_FACING_LEFT,

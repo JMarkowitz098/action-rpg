@@ -45,34 +45,24 @@ class WeaponMovement extends Movement {
         return ({ newX, newY })
     }
 
-    getCoordInfo(type, { x, y }) {
+    getCoordInfo(type, { x, y, length, width }) {
         let oldX, oldY;
         switch (type) {
-            case C.WEAPON_DIR_VERTICAL:
-                oldX = x + (C.HERO_SPRITE_SCALED_WIDTH - this.width) / 2
-                oldY = y + (C.HERO_SPRITE_SCALED_LENGTH - this.length) / 2
+            case C.DIR_LEFT:
+            case C.DIR_RIGHT:
+                oldX = x + (C.HERO_SPRITE_SCALED_WIDTH - width) / 2
+                oldY = y + (C.HERO_SPRITE_SCALED_LENGTH - length) / 2
                 break;
-            case C.WEAPON_DIR_HORIZONTAL:
-                oldX = x - (this.length - C.HERO_SPRITE_SCALED_WIDTH) / 2
-                oldY = y - (this.width - C.HERO_SPRITE_SCALED_LENGTH) / 2
+            case C.DIR_UP:
+            case C.DIR_DOWN:
+                oldX = x - (length - C.HERO_SPRITE_SCALED_WIDTH) / 2
+                oldY = y - (width - C.HERO_SPRITE_SCALED_LENGTH) / 2
                 break;
         }
 
         return { oldX, oldY }
     }
 
-    getNewDir(dir) {
-        switch (dir) {
-            case C.DIR_UP:
-            case C.DIR_DOWN:
-                return C.WEAPON_DIR_HORIZONTAL
-            case C.DIR_LEFT:
-            case C.DIR_RIGHT:
-                return C.WEAPON_DIR_VERTICAL
-            default:
-                return C.WEAPON_DIR_HORIZONTAL
-        }
-    }
 }
 
 export default WeaponMovement

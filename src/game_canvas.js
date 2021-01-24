@@ -2,6 +2,8 @@ import * as C from './constants'
 import Hero from './hero'
 import Enemy from './enemy'
 
+
+
 // Represents the plying area
 class GameCanvas {
     constructor({ ctx }) {
@@ -26,7 +28,8 @@ class GameCanvas {
 
     createBackground(){
         let image = new Image
-        image.src = '/Users/jared/Desktop/Coding/action_rpg/floor.jpg'
+        image.src = '../sprite_sheets/floor.jpg'
+        // image.src = '../'
         return image
     }
 

@@ -30,6 +30,8 @@ class Sprite {
         let image = new Image
         image.src = imageSrc
         this.image = image
+
+        this.updateSpritePositionsIdx = this.updateSpritePositionsIdx.bind(this)
     }
 
     changeFrameAttributes(dir) {
@@ -92,6 +94,10 @@ class Sprite {
             case C.DIR_DOWN_RIGHT:
                 return facingDown
         }
+    }
+
+    updateSpritePositionsIdx(){
+        this.spritePositionsIdx = 0;
     }
 }
 
