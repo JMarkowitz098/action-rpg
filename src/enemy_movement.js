@@ -50,6 +50,27 @@ class EnemyMovement extends Movement {
         }
         return newDir
     }
+
+    getReverseDir(dir){
+        switch (dir) {
+            case C.DIR_UP:
+                return C.DIR_DOWN
+            case C.DIR_DOWN:
+                return C.DIR_UP
+            case C.DIR_LEFT:
+                return C.DIR_RIGHT
+            case C.DIR_RIGHT:
+                return C.DIR_LEFT
+            case C.DIR_LEFT_UP:
+                return C.DIR_DOWN_RIGHT
+            case C.DIR_RIGHT_UP:
+                return C.DIR_DOWN_LEFT
+            case C.DIR_DOWN_LEFT:
+                return C.DIR_RIGHT_UP
+            case C.DIR_DOWN_RIGHT:
+                return C.DIR_LEFT_UP
+        }
+    }
 }
 
 export default EnemyMovement

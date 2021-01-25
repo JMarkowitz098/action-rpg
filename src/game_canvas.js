@@ -63,15 +63,21 @@ class GameCanvas {
     checkForCollisions(){
         const { hero, enemies } = this;
 
-        let heroColidedWithEnemy = 
-            enemies.some(enemy => hero.collidedWith(enemy))
-        if (heroColidedWithEnemy && hero.isVulnerable()) hero.decreaseHealth();
+        let enemiesThatCollided = 
+            enemies.filter(enemy => hero.collidedWith(enemy))
+        if (enemiesThatCollided.length > 0) {
+            enemiesThatCollided.forEach(enemy => enemy.reverseDir())
+            if (hero.isVulnerable()) hero.decreaseHealth();
+        }
            
-        let enemyIdxs = []
+        let deadEnemyIdxs = []
         this.enemies.forEach((enemy, idx) => {
-            if (this.hero.weapon.collidedWith(enemy)) enemyIdxs.push(idx)
+            if (this.hero.weapon.collidedWith(enemy) && enemy.isVulnerable) {
+                enemy.decreaseHealth();
+                if (enemy.isDead()) deadEnemyIdxs.push(idx)
+            }
         })
-        enemyIdxs.forEach(idx => {
+        deadEnemyIdxs.forEach(idx => {
             this.enemies.splice(idx, 1)
             this.increaseScore()
         })

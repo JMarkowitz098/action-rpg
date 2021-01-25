@@ -147,7 +147,11 @@ class Hero extends GameObject {
 
     dash(){
         this.changeVel(C.HERO_DASH_SPEED)
-        setTimeout(() => this.changeVel(1), C.HERO_DASH_TIME)
+        this.color = 'purple'
+        setTimeout(() => { 
+            this.changeVel(1) 
+            this.color = C.HERO_COLOR
+        }, C.HERO_DASH_TIME)
     }
 }
 

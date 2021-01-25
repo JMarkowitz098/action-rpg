@@ -1,5 +1,5 @@
 export const TOGGLE_ENEMY_MOVEMENT = true;
-export const TOGGLE_ENEMY_SPAWN = false;
+export const TOGGLE_ENEMY_SPAWN = true;
 export const TOOGGLE_DRAW_HITBOXES = false;
 
 export const UNIT = 5;
@@ -84,7 +84,7 @@ export const HERO_START_POS = { x: PLAY_AREA_START_POS, y: PLAY_AREA_START_POS}
 export const HERO_START_DIR = DIR_DOWN
 export const HERO_START_HEALTH = 3
 export const HERO_DASH_SPEED = 8
-export const HERO_DASH_TIME = 50
+export const HERO_DASH_TIME = 100
 
 export const HERO_SPRITE_SCALE = 1.3
 export const HERO_SPRITE_SCALED_WIDTH = HERO_WIDTH * HERO_SPRITE_SCALE
@@ -102,7 +102,7 @@ export const WEAPON_DIST = 60
 export const WEAPON_DELTA_START = -40
 export const WEAPON_DELTA_END = 60
 export const WEAPON_DELTA_INTERVAL = 7
-export const WEAPON_DURATION = 250
+export const WEAPON_DURATION = 200
 
 export const WEAPON_SPRITE_LENGTH = 60
 export const WEAPON_SPRITE_WIDTH = 50

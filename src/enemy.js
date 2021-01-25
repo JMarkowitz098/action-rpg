@@ -29,6 +29,8 @@ class Enemy extends GameObject {
             scaledLength: C.ENEMY_SPRITE_SCALED_LENGTH,
             dir: this.dir
         })
+        this.health = 2;
+        this.isVulnerable = true;
     }
 
     draw() {
@@ -36,9 +38,19 @@ class Enemy extends GameObject {
 
         if(this.movement.isInCanvas({x, y})){
             if (C.TOOGGLE_DRAW_HITBOXES) this.drawHitBox()
-            this.sprite.changeFrameAttributes(dir)
-            this.sprite.drawFrame(x, y, ctx);
-        }
+
+            if (this.isVulnerable){
+                this.sprite.changeFrameAttributes(dir)
+                this.sprite.drawFrame(x, y, ctx);
+            } else {
+                    ctx.fillStyle = 'orange';
+                    ctx.fillRect(
+                        x, y, 
+                        C.ENEMY_SPRITE_SCALED_WIDTH, 
+                        C.ENEMY_SPRITE_SCALED_LENGTH
+                    )
+            }
+        };
        
     }
 
@@ -53,8 +65,22 @@ class Enemy extends GameObject {
         );
     }
 
+    decreaseHealth() {
+        this.health -= 1;
+        this.isVulnerable = false;
+        setTimeout(() => this.isVulnerable = true, 200)
+    }
+
+    isDead() {
+        return this.health <= 0;
+    }
+
     changeDir() {
         this.dir = this.movement.getRandomDir(this.dir)
+    }
+
+    reverseDir(){
+        this.dir = this.movement.getReverseDir(this.dir)
     }
 
     changeVel(vel) {

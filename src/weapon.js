@@ -1,6 +1,6 @@
 import * as C from './constants'
 import GameObject from './game_object'
-import TempSprite from './temp_sprite'
+import WeaponSprite from './weapon_sprite'
 import WeaponMovement from './weapon_movement'
 
 class Weapon extends GameObject {
@@ -16,7 +16,7 @@ class Weapon extends GameObject {
         this.width = C.WEAPON_WIDTH
         this.movement = new WeaponMovement(
             { width: this.width, length: this.length })
-        this.sprite = new TempSprite();
+        this.sprite = new WeaponSprite();
         this.deltaIdx = 0;
         this.isOut = false;
 

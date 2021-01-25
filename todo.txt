@@ -1,4 +1,5 @@
-
+-Move draw directions in weapon class into weapon sprite
+-Redo other sprite classes to use parent class width
 
 "test": "mocha --require @babel/register --recursive",
 
