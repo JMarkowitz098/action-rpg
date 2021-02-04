@@ -95,7 +95,7 @@ class GameCanvas {
         let scoreStr = scoreEle.innerHTML
         let score = parseInt(scoreStr.split(':')[1])
         score += 1
-        scoreEle.innerHTML = `Score: ${score}`;
+        scoreEle.innerHTML = `SCORE: ${score}`;
     }
 
     clearCanvas() {
@@ -107,7 +107,7 @@ class GameCanvas {
             C.PLAY_AREA_SIDE_LENGTH
         );
 
-        ctx.fillStyle = 'grey';
+        ctx.fillStyle = 'black';
         ctx.fillRect(
             0,
             0,

@@ -5,12 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="application/javascript" src="./main.js"></script>
     <link rel="stylesheet" href="./canvas.css">
-    <title>Action RPG</title>
+    <title>Zombie Slayer</title>
 </head>
 <body>
-    <div>Action RPG</div>
-    <div id='score'>SCORE: 0</div>
-    <canvas id="game-canvas" width="600" height="600"></canvas>
+    <div class="title">Zombie Slayer</div>
+    <section id="game-body">
+        <canvas id="game-canvas" width="600" height="600"></canvas>
+        <section id="side-bar">
+            <h3>Controls</h3>
+            <ul>
+                <li>Move: Arrows Keys</li>
+                <li>Attack: 'X'</li>
+                <li>Dash: 'Z'</li>
+            </ul>
+            <div id='score'>SCORE: 0</div>
+        </section>
+    </section>
     
 </body>
 </html>

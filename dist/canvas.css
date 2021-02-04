@@ -1,3 +1,55 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: grey;
+}
+
+#game-body{
+    display: flex;
+}
+
 #game-canvas {
     border: 1px solid black;
+    width: 600px;
+}
+
+.title{
+    font-size: 3em;
+    margin: 20px;
+    padding: 20px;
+    width: 12em;
+    background-color: black;
+    text-align: center;
+    color: red;
+}
+
+#side-bar {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    width: 20em;
+    height: 100%;
+    align-items: center;
+    color: red; 
+}
+
+#side-bar div {
+    margin: 10px;
+    font-size: 2em;
+}
+
+#side-bar h3 {
+    margin: 0;
+    margin-top: 10px;
+    font-size: large;
+}
+
+#side-bar ul {
+    list-style-type: none;
+    font-weight: bold;
+}
+
+#side-bar li {
+    padding: 3px;
 }
