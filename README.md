@@ -1,4 +1,4 @@
-# Zombie Slayer - [Game](https://jmarkowitz098.github.io/action-rpg/dist/)
+# Zombie Slayer - [Live Game](https://jmarkowitz098.github.io/action-rpg/dist/)
 ![Demo_SS](Zombie_Slayer_Demo.gif "Demo_SS")
 
 Zombie Slayer is a quick game where you have to defend yourself from incoming zombies. Slay as many as you can to get the high score!
