@@ -2,8 +2,6 @@ import * as C from './constants'
 import Hero from './hero'
 import Enemy from './enemy'
 
-
-
 // Represents the plying area
 class GameCanvas {
     constructor({ ctx }) {
@@ -18,10 +16,8 @@ class GameCanvas {
     }
 
     placeNewEnemy() {
-        const { hero, ctx } = this;
+        const { ctx } = this;
         let attrs = getRandStartPos()
-        while (hero.collidedWith({x: attrs.pos.x, y: attrs.pos.y})) // Don't need anymore
-            attrs = getRandStartPos()
         let enemy = new Enemy({ ...attrs,ctx })
         this.enemies.push(enemy)
     }
@@ -29,7 +25,6 @@ class GameCanvas {
     createBackground(){
         let image = new Image
         image.src = '../sprite_sheets/floor.jpg'
-        // image.src = '../'
         return image
     }
 
@@ -101,8 +96,8 @@ class GameCanvas {
     clearCanvas() {
         const { ctx } = this;
         ctx.clearRect(
-            C.PLAY_AREA_SIDE_LENGTH, //Why is this not an x coordinate?
-            C.PLAY_AREA_SIDE_LENGTH, //Why is this not an y coordinate?
+            C.PLAY_AREA_SIDE_LENGTH, 
+            C.PLAY_AREA_SIDE_LENGTH,
             C.PLAY_AREA_SIDE_LENGTH,
             C.PLAY_AREA_SIDE_LENGTH
         );
